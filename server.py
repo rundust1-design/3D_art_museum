@@ -109,6 +109,47 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({"layout": data}).encode())
             return
+        if self.path == "/api/models-layout":
+            layout_file = os.path.join(BASE_DIR, "assets", "models-layout.json")
+            if os.path.exists(layout_file):
+                try:
+                    with open(layout_file, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                except Exception:
+                    data = None
+            else:
+                data = None
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps({"layout": data}).encode())
+            return
+        if self.path == "/api/model-name-map":
+            name_file = os.path.join(BASE_DIR, "assets", "name.txt")
+            mapping = {}
+            try:
+                with open(name_file, "r", encoding="utf-8") as f:
+                    content = f.read().strip()
+                    for item in content.split(","):
+                        item = item.strip()
+                        if not item:
+                            continue
+                        parts = item.split(".", 1)
+                        if len(parts) == 2:
+                            num = parts[0].strip().zfill(2)
+                            rest = parts[1].strip()
+                            if rest.endswith(".glb"):
+                                rest = rest[:-4]
+                            mapping[num + ".glb"] = rest
+            except FileNotFoundError:
+                pass
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps(mapping).encode())
+            return
         if self.path == "/api/painting-sizes":
             assets_dir = os.path.join(BASE_DIR, "assets", "images")
             sizes = {}
@@ -139,6 +180,28 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 try:
                     data = json.loads(body)
                     layout_file = os.path.join(BASE_DIR, "assets", "images", "paintings-layout.json")
+                    with open(layout_file, "w", encoding="utf-8") as f:
+                        json.dump(data, f, ensure_ascii=False, indent=2)
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json")
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"ok": True}).encode())
+                    return
+                except Exception as e:
+                    self.send_response(400)
+                    self.send_header("Content-Type", "application/json")
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"error": str(e)}).encode())
+                    return
+        if self.path == "/api/models-layout":
+            content_len = int(self.headers.get("Content-Length", 0))
+            if content_len > 0:
+                body = self.rfile.read(content_len)
+                try:
+                    data = json.loads(body)
+                    layout_file = os.path.join(BASE_DIR, "assets", "models-layout.json")
                     with open(layout_file, "w", encoding="utf-8") as f:
                         json.dump(data, f, ensure_ascii=False, indent=2)
                     self.send_response(200)

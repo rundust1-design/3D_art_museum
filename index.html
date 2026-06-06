@@ -7,19 +7,34 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{overflow:hidden;background:#000;font-family:"Segoe UI","Microsoft YaHei",sans-serif}canvas{display:block}#ui{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.88);color:#fff;padding:28px 36px;border-radius:14px;text-align:center;z-index:100;border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);transition:opacity .5s}#ui h1{font-size:26px;margin-bottom:6px}#ui .sub{color:#aaa;font-size:13px;margin-bottom:18px}#ui .keys{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;text-align:left;font-size:13px;margin-bottom:18px}#ui .keys div{color:#ccc}#ui .keys b{color:#ffd700}#ui button{padding:12px 44px;font-size:15px;cursor:pointer;background:#ffd700;color:#1a1a1a;border:none;border-radius:8px;font-weight:bold;transition:transform .2s,box-shadow .2s}#ui button:hover{transform:scale(1.05);box-shadow:0 0 24px rgba(255,215,0,.4)}#bar{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.82);color:#fff;padding:10px 18px;display:flex;align-items:center;gap:14px;z-index:50;backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.08);font-size:12px}#bar .hall{color:#aaa}#bar .name{color:#ffd700;font-size:14px;font-weight:bold}#loading{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.92);color:#fff;padding:24px 36px;border-radius:12px;z-index:200;text-align:center;display:none;border:1px solid rgba(255,215,0,.25)}#loading .spin{width:36px;height:36px;border:3px solid #333;border-top-color:#ffd700;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px}@keyframes spin{to{transform:rotate(360deg)}}#loading .pct{color:#ffd700;font-size:18px}#popup{position:fixed;top:16px;right:16px;width:300px;background:rgba(0,0,0,.85);color:#fff;padding:18px;border-radius:12px;z-index:80;display:none;backdrop-filter:blur(8px);border:1px solid rgba(255,215,0,.18)}#popup h3{color:#ffd700;margin-bottom:6px;font-size:15px}#popup p{color:#ccc;font-size:12px;line-height:1.6}#popup .cls{position:absolute;top:6px;right:10px;cursor:pointer;color:#aaa;font-size:16px}#popup .cls:hover{color:#ffd700}#minimap{position:fixed;bottom:60px;left:14px;width:180px;height:200px;background:rgba(0,0,0,.7);border-radius:8px;z-index:60;border:1px solid rgba(255,255,255,.12);overflow:hidden;cursor:pointer;transition:all .3s}#minimap canvas{width:100%;height:100%}#minimap.fullscreen{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vh;z-index:1000;border-color:#ffd700;border-width:2px}
-#edit-panel{position:fixed;top:5px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);backdrop-filter:blur(8px);border:1px solid #ffd700;border-radius:10px;padding:6px 14px;z-index:90;display:none;align-items:center;gap:6px;color:#fff;font-size:12px;box-shadow:0 4px 24px rgba(255,215,0,.15)}#edit-panel.active{display:flex}#edit-panel .sep{color:#444}#edit-panel .btn{padding:5px 10px;border:none;border-radius:5px;cursor:pointer;font-size:11px;font-weight:bold;transition:transform .15s}#edit-panel .btn:hover{transform:scale(1.05)}#edit-panel .btn-save{background:#ffd700;color:#1a1a1a}#edit-panel .btn-init{background:#e07020;color:#fff}#edit-panel .btn-close{background:#555;color:#fff}#edit-panel .hint{color:#ffd700;font-size:11px;font-weight:bold}#edit-panel .status{color:#8f8;font-size:11px;display:none}#edit-panel .wall-btn{width:28px;height:28px;border-radius:50%;border:2px solid #ffd700;background:transparent;color:#ffd700;font-weight:bold;font-size:13px;cursor:pointer;transition:all .15s}#edit-panel .wall-btn:hover{background:#ffd700;color:#1a1a1a}#edit-panel .wall-btn.active{background:#ffd700;color:#1a1a1a}#edit-mode-badge{position:fixed;bottom:48px;left:50%;transform:translateX(-50%);z-index:85;color:#ffd700;font-size:12px;background:rgba(0,0,0,.7);padding:5px 16px;border-radius:6px;border:1px solid rgba(255,215,0,.25);display:none;pointer-events:none;white-space:nowrap}
+#edit-panel{position:fixed;top:5px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);backdrop-filter:blur(8px);border:1px solid #ffd700;border-radius:10px;padding:6px 14px;z-index:90;display:none;align-items:center;gap:6px;color:#fff;font-size:12px;box-shadow:0 4px 24px rgba(255,215,0,.15)}#edit-panel.active{display:flex}#edit-panel .sep{color:#444}#edit-panel .btn{padding:5px 10px;border:none;border-radius:5px;cursor:pointer;font-size:11px;font-weight:bold;transition:transform .15s}#edit-panel .btn:hover{transform:scale(1.05)}#edit-panel .btn-save{background:#ffd700;color:#1a1a1a}#edit-panel .btn-init{background:#e07020;color:#fff}#edit-panel .btn-close{background:#555;color:#fff}#edit-panel .hint{color:#ffd700;font-size:11px;font-weight:bold}#edit-panel .status{color:#8f8;font-size:11px;display:none}#edit-panel .wall-btn{width:28px;height:28px;border-radius:50%;border:2px solid #ffd700;background:transparent;color:#ffd700;font-weight:bold;font-size:13px;cursor:pointer;transition:all .15s}#edit-panel .wall-btn:hover{background:#ffd700;color:#1a1a1a}#edit-panel .wall-btn.active{background:#ffd700;color:#1a1a1a}#edit-panel .submode-btn{padding:3px 8px;border-radius:4px;font-size:11px;font-weight:bold;cursor:pointer;transition:all .15s}#edit-panel .submode-btn.active{background:#ffd700;color:#1a1a1a;border:1px solid #ffd700}#edit-panel .submode-btn.inactive{background:transparent;color:#aaa;border:1px solid #888}#edit-panel .submode-btn:hover{transform:scale(1.05)}#edit-mode-badge{position:fixed;bottom:48px;left:50%;transform:translateX(-50%);z-index:85;color:#ffd700;font-size:12px;background:rgba(0,0,0,.7);padding:5px 16px;border-radius:6px;border:1px solid rgba(255,215,0,.25);display:none;pointer-events:none;white-space:nowrap}
 #cs-arrow{position:fixed;z-index:95;display:none;pointer-events:none;color:#ff4444;font-size:28px;font-weight:bold;text-shadow:0 0 8px rgba(255,68,68,.6),0 0 16px rgba(255,68,68,.3);transition:all .05s;transform:translate(-50%,-50%)}
 </style>
 </head>
 <body>
-<div id="ui"><h1>Virtual Museum</h1><div class="sub" id="subtitle">Loading...</div><div class="keys"><div><b>W A S D</b> Move</div><div><b>Mouse</b> Look</div><div><b>E</b> Load/View</div><div><b>ESC</b> Release</div><div><b>Scroll</b> Zoom</div><div><b>Drag</b> Rotate</div><div><b>Tab</b> Edit Mode</div></div><button id="btn-enter">Enter Museum</button></div>
-<div id="loading"><div class="spin"></div><div class="pct" id="lpct">0%</div><div id="ltxt" style="color:#999;font-size:11px">Loading...</div></div>
-<div id="bar"><span class="hall" id="hall">Central Hall</span><span class="name" id="exh"></span><span id="hint" style="color:#999">Approach pedestal &amp; press E</span></div>
+<div id="ui"><h1>云上艺术馆</h1><div class="sub" id="subtitle">加载中...</div><div class="keys"><div><b>W A S D</b> 移动</div><div><b>鼠标</b> 环顾</div><div><b>E</b> 查看展品</div><div><b>[ / ]</b> 调节视角</div><div><b>ESC</b> 释放鼠标</div><div><b>滚轮</b> 缩放</div><div><b>拖动</b> 旋转</div><div><b>Tab</b> 编辑模式</div></div><button id="btn-enter">进入展馆</button></div>
+<div id="loading"><div class="spin"></div><div class="pct" id="lpct">0%</div><div id="ltxt" style="color:#999;font-size:11px">加载中...</div></div>
+<div id="bar"><span class="hall" id="hall">走廊</span><span class="name" id="exh"></span><span id="hint" style="color:#999">四处走走探索</span></div>
 <div id="popup"><span class="cls" id="pcls">&times;</span><h3 id="ptitle"></h3><p id="pbody"></p></div>
 <div id="minimap"><canvas id="mm" width="180" height="200"></canvas></div>
 <div id="cs-arrow">→</div>
-<div id="edit-panel"><span class="hint">🖌️ 编辑模式</span><span class="sep">|</span><span id="wall-select-label" style="color:#aaa;font-size:11px">选择墙面:</span><span id="wall-buttons"></span><span class="sep">|</span><span id="painting-info" style="color:#8cf;font-size:11px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span><span class="sep">|</span><button class="btn btn-save" id="btn-save-layout">💾 保存</button><button class="btn btn-init" id="btn-init-layout">🔄 初始化</button><button class="btn btn-close" id="btn-close-edit">✕ 关闭</button><span class="status" id="save-status">✓ 已保存!</span></div>
-<div id="edit-mode-badge">⚡ 编辑模式 | 点击画选中 | 点墙面数字移动 | WS上下 AD左右 | Q下一面墙 | E翻转方向 | R拉远 F拉近 | Z保存+输出数据 | 滚轮缩放 | Tab退出</div>
+<div id="edit-panel">
+  <span class="hint">🖌️ 编辑</span>
+  <span class="sep">|</span>
+  <button class="submode-btn active" data-submode="paintings" id="smb-paintings">🖼️ 画作</button>
+  <button class="submode-btn inactive" data-submode="models" id="smb-models">🗿 模型</button>
+  <span class="sep">|</span>
+  <span id="wall-select-label" style="color:#aaa;font-size:11px">墙面:</span>
+  <span id="wall-buttons"></span>
+  <span id="model-info" style="color:#8cf;font-size:11px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:none"></span>
+  <span id="painting-info" style="color:#8cf;font-size:11px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+  <span class="sep">|</span>
+  <button class="btn btn-save" id="btn-save-layout">💾 保存</button>
+  <button class="btn btn-init" id="btn-init-layout">🔄 初始化</button>
+  <button class="btn btn-close" id="btn-close-edit">✕ 关闭</button>
+  <span class="status" id="save-status">✓ 已保存!</span>
+</div>
+<div id="edit-mode-badge">⚡ 编辑模式 | 点击选中 | M切换画作/模型 | Tab退出</div>
 <script type="importmap">
 {"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
 </script>
@@ -27,87 +42,72 @@
 import * as THREE from "three";
 import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
 import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
-const CS_SCALE = 0.3; // multiplier for cs offset (distance from wall surface)
-let MODELS = [];
-let PAINTINGS = [];
-let PAINTING_SIZES = {};
-let HALLS = [];
-const POS = [];
 
-function buildHallNames(count) {
-  const pattern = [
-    {name: "Entrance",    n: 1},
-    {name: "East Gallery", n: 8},
-    {name: "West Gallery", n: 8},
-    {name: "Central Hall", n: 4},
-    {name: "Rear Sanctum", n: 5},
-  ];
-  const halls = [];
-  for (const p of pattern) {
-    for (let j = 0; j < p.n && halls.length < count; j++) halls.push(p.name);
-  }
-  while (halls.length < count) halls.push("Gallery");
-  return halls;
-}
+// ===================== CONSTANTS =====================
+const CS_SCALE = 0.3;
+const r0 = 0, rP = Math.PI, rH = Math.PI/2, rNH = -Math.PI/2;
 
-function buildPositions(count) {
+const ALL_WALLS = [
+  {x:-5.05, rotY:rH, zStart:-14, zEnd:5, range:19, cs:1, faceRotY:rH},      // ①
+  {x:5.05, rotY:rNH, zStart:-14, zEnd:5, range:19, cs:-1, faceRotY:rNH},     // ②
+  {x:10.8, rotY:rNH, zStart:-18, zEnd:4, range:22, cs:-1, faceRotY:rNH},     // ③
+  {x:-10.8, rotY:rH, zStart:-18, zEnd:4, range:22, cs:1, faceRotY:rH},       // ④
+  {z:22.8, rotY:rP, xStart:-10.5, xEnd:10.5, range:21, cs:-1, faceRotY:rP},  // ⑤
+  {z:-20.8, rotY:r0, xStart:-10.5, xEnd:10.5, range:21, cs:1, faceRotY:r0},  // ⑥
+  {z:17.35, rotY:rP, xStart:-4.5, xEnd:4.5, range:9, cs:-1, faceRotY:rP},    // ⑦
+  {x:-4.95, rotY:rNH, zStart:-14, zEnd:5, range:19, cs:-1.5, faceRotY:rNH},  // ⑧
+  {x:4.95, rotY:rH, zStart:-14, zEnd:5, range:19, cs:1.45, faceRotY:rH},     // ⑨
+  {z:17.65, rotY:r0, xStart:-4.5, xEnd:4.5, range:9, cs:1, faceRotY:r0},     // ⑩
+];
+
+// Model placement — priority order per user rules
+// 1. 6号墙前 (后墙 z=-20.8, 大厅侧) — 4个, 距墙2个模型距离
+// 2. 10号墙前 (z=17.65, 入口侧) — 4个, 距墙2个模型距离
+// 3. 4号墙(x=-10.8)和8号墙(x=-4.95)之间 — 6个, 居中排列
+// 4. 3号墙(x=10.8)和9号墙(x=4.95)之间 — 6个, 居中排列
+// 5. 1号墙(x=-5.05)和2号墙(x=5.05)之间 — 8个, 居中排列
+function buildModelPositions(count) {
   const pos = [];
-  for (let j = 0; j < 4 && pos.length < count; j++) pos.push([(j - 1.5) * 3.2, -18]);
-  for (let j = 0; j < 8 && pos.length < count; j++) pos.push([7.5, -8.5 + j * 2.5]);
-  for (let j = 0; j < 8 && pos.length < count; j++) pos.push([-7.5, -8.5 + j * 2.5]);
-  const central = [[-2, 13], [2, 13], [-2, 16], [2, 16]];
-  for (let j = 0; j < central.length && pos.length < count; j++) pos.push(central[j]);
-  const rear = [[-2, 22], [2, 22]];
-  for (let j = 0; j < rear.length && pos.length < count; j++) pos.push(rear[j]);
+  const half = 0.55; // half pedestal width
+  const gap = 2 * half; // "2个模型距离" = 1.1
+  // 1: 6号墙前 (z=-20.8 大厅侧) — 4个
+  const zA = -20.8 + gap;  // = -19.7
+  const xA = [-7.5, -2.5, 2.5, 7.5];
+  for (const x of xA) { if (pos.length < count) pos.push([x, zA]); }
+  // 2: 10号墙前 (z=17.65 主厅侧, 对着主厅方向z↓) — 4个, 放在z<17.35侧不在5-7之间
+  const zB = 16.2;
+  const xB = [-3.5, -1.17, 1.17, 3.5];
+  for (const x of xB) { if (pos.length < count) pos.push([x, zB]); }
+  // 3: 4号墙(x=-10.8)和8号墙(x=-4.95)之间 — 左走廊, 居中于x ≈ -7.875
+  for (let j = 0; j < 6 && pos.length < count; j++) pos.push([-7.875, -14 + j * 3.8]);
+  // 4: 3号墙(x=10.8)和9号墙(x=4.95)之间 — 右走廊, 居中于x ≈ 7.875
+  for (let j = 0; j < 6 && pos.length < count; j++) pos.push([7.875, -14 + j * 3.8]);
+  // 5: 1号墙(x=-5.05)和2号墙(x=5.05)之间 — 主厅, 居中于x = 0
+  for (let j = 0; j < 8 && pos.length < count; j++) pos.push([0, -12 + j * 3.2]);
   return pos;
 }
 
-// Wall surfaces for painting placement — one per solid wall face
-// Priority order (high to low): ⑥ → ⑤ → ③ → ② → ④ → ① → rear alcove walls
-const r0 = 0, rP = Math.PI, rH = Math.PI/2, rNH = -Math.PI/2;
-const ALL_WALLS = [
-  // ① 内左墙 (x=-5.05) — 观众在大厅(+X侧), frame+canvas 面向+X方向
-  //    PlaneGeometry默认法线=+Z, rotation.y=PI/2 → 法线指向+X
-  {x:-5.05, rotY:rH, zStart:-14, zEnd:5, range:19, cs:1, faceRotY:rH},
-  // ② 内右墙 (x=5.05) — 观众在大厅(-X侧), frame+canvas 面向-X方向
-  //    rotation.y=-PI/2 → 法线指向-X
-  {x:5.05, rotY:rNH, zStart:-14, zEnd:5, range:19, cs:-1, faceRotY:rNH},
-  // ③ 右外墙 (x=10.8) — 观众在大厅(-X侧), frame+canvas 面向-X方向
-  {x:10.8, rotY:rNH, zStart:-18, zEnd:4, range:22, cs:-1, faceRotY:rNH},
-  // ④ 左外墙 (x=-10.8) — 观众在大厅(+X侧), frame+canvas 面向+X方向
-  {x:-10.8, rotY:rH, zStart:-18, zEnd:4, range:22, cs:1, faceRotY:rH},
-  // ⑤ 前墙 (z=22.8) — 观众在大厅(-Z侧), 面向-Z方向, rotation.y=PI → 法线指向-Z
-  {z:22.8, rotY:rP, xStart:-10.5, xEnd:10.5, range:21, cs:-1, faceRotY:rP},
-  // ⑥ 后墙 (z=-20.8) — 观众在大厅(+Z侧), 面向+Z方向, rotation.y=0 → 法线指向+Z
-  {z:-20.8, rotY:r0, xStart:-10.5, xEnd:10.5, range:21, cs:1, faceRotY:r0},
-  // ⑦ 隔断主厅侧 (z=17.35) — 主厅在-Z侧, 面向-Z, rotation.y=PI → 法线指向-Z
-  {z:17.35, rotY:rP, xStart:-4.5, xEnd:4.5, range:9, cs:-1, faceRotY:rP},
-  // ⑧ 内左墙反面 (x=-4.95) — 走廊在-X侧, 面向走廊(-X), rotY=-PI/2 → 法线指向-X
-  //    cs:-1.5 → canvas偏移到-X侧(走廊方向), 用户实测值
-  {x:-4.95, rotY:rNH, zStart:-14, zEnd:5, range:19, cs:-1.5, faceRotY:rNH},
-  // ⑨ 内右墙反面 (x=4.95) — 走廊在+X侧, 面向走廊(+X), rotY=PI/2 → 法线指向+X
-  //    cs:1.45 → canvas偏移到+X侧(走廊方向), 用户实测值
-  {x:4.95, rotY:rH, zStart:-14, zEnd:5, range:19, cs:1.45, faceRotY:rH},
-  // ⑩ 隔断入口侧 (z=17.65) — 入口在+Z侧, 面向入口(+Z), rotY=0 → 法线指向+Z
-  {z:17.65, rotY:r0, xStart:-4.5, xEnd:4.5, range:9, cs:1, faceRotY:r0},
-];
+function buildDefaultModelLayout(count) {
+  const layout = [];
+  const positions = buildModelPositions(count);
+  for (let i = 0; i < positions.length; i++) {
+    layout.push({x: positions[i][0], z: positions[i][1], rotY: 0, scale: 1.2});
+  }
+  return layout;
+}
 
-// Default painting positions (used when no saved layout exists)
-// Each wall holds up to 6 paintings; fill higher-priority walls first, then move to next.
+// ===================== PAINTING LAYOUT =====================
 function buildDefaultPaintingLayout(count) {
   const layout = [];
   const yBase = 2.2;
   const spacing = 2.4;
   const MAX_PER_WALL = 6;
-
   let remaining = count;
-
   for (const w of ALL_WALLS) {
     if (remaining <= 0) break;
     const maxFit = Math.floor(w.range / spacing);
     const onThisWall = Math.min(MAX_PER_WALL, remaining, maxFit);
     const totalWidth = (onThisWall - 1) * spacing;
-
     for (let j = 0; j < onThisWall; j++) {
       if (w.xStart !== undefined) {
         const center = (w.xStart + w.xEnd) / 2;
@@ -124,172 +124,133 @@ function buildDefaultPaintingLayout(count) {
       }
     }
   }
-
   return layout;
 }
 
 function getLabelScale(rotY, faceRotY) {
-  // If faceRotY is explicitly defined and differs from rotY by ≈PI,
-  // the frame faces the opposite direction from the canvas/label →
-  // the label canvas texture needs to be flipped horizontally
-  // so text reads correctly from the viewer's perspective.
-  //
-  // Key insight: when rotY === faceRotY, frame and canvas face the same way,
-  // so the PlaneGeometry label (which sits in front of the canvas) shows text correctly.
-  // When rotY !== faceRotY (difference ≈PI), the frame faces the wall surface
-  // (away from the viewer), while the canvas/label face the viewer.
-  // The label PlaneGeometry is rotated to face the viewer, but its texture
-  // (text drawn left-to-right on a 2D canvas) appears mirrored because the
-  // plane's local X-axis points opposite to the viewer's left-right direction.
-  //
-  // Solution: flip scale.x when frame and canvas face opposite directions.
   const fRY = faceRotY !== undefined ? faceRotY : rotY;
   const diff = Math.abs(rotY - fRY);
   const ndiff = diff % (Math.PI * 2);
-  // When frame faces viewer (same direction as canvas) → normal text
-  // When frame faces away from viewer (opposite to canvas) → flip text
-  // Flip when diff ≈ PI (i.e., opposite directions)
   const needsFlip = (ndiff > Math.PI / 2 && ndiff < Math.PI * 3 / 2);
   return needsFlip ? -1 : 1;
 }
 
-const raycaster = new THREE.Raycaster();
-
-const pointer = new THREE.Vector2();
-
-function stripExt(name) {
-  return name.replace(/\.\w+$/, "");
-}
-
-async function fetchModelList() {
-  try {
-    const resp = await fetch("api/models");
-    const data = await resp.json();
-    MODELS = data.models;
-    HALLS = buildHallNames(MODELS.length);
-    for (const p of buildPositions(MODELS.length)) POS.push(p);
-    document.getElementById("subtitle").textContent = MODELS.length + " 3D Exhibits";
-  } catch (e) {
-    console.error("Failed to fetch model list", e);
-    MODELS = [];
-    HALLS = [];
-    document.getElementById("subtitle").textContent = "No models found";
-  }
-}
-
-async function fetchPaintingList() {
-  try {
-    const resp = await fetch("api/paintings");
-    const data = await resp.json();
-    PAINTINGS = data.paintings;
-    console.log("Paintings found:", PAINTINGS.length);
-  } catch (e) {
-    console.error("Failed to fetch painting list", e);
-    PAINTINGS = [];
-  }
-}
-
+// ===================== GLOBALS =====================
+let MODELS = [];
+let PAINTINGS = [];
+let PAINTING_SIZES = {};
 let NAME_MAP = {};
+let MODEL_NAME_MAP = {};
 
-async function fetchNameMap() {
-  try {
-    const resp = await fetch("api/name-map");
-    NAME_MAP = await resp.json();
-  } catch (e) {
-    console.error("Failed to fetch name map", e);
-  }
-}
+// ===================== COLLISION DATA =====================
+const COLLISION_WALLS = [
+  { minX: -11, maxX: 11, minZ: -21.2, maxZ: -20.8 },    // back wall
+  { minX: -11.2, maxX: -10.8, minZ: -19.25, maxZ: 5.25 }, // left outer
+  { minX: 10.8, maxX: 11.2, minZ: -19.25, maxZ: 5.25 },   // right outer
+  { minX: -11, maxX: 11, minZ: 22.8, maxZ: 23.2 },        // front wall
+  { minX: -5.35, maxX: -5.05, minZ: -15.25, maxZ: 6.25 }, // left inner (wood)
+  { minX: 5.05, maxX: 5.35, minZ: -15.25, maxZ: 6.25 },   // right inner (wood)
+  { minX: -5.25, maxX: 5.25, minZ: 17.35, maxZ: 17.65 },  // dividing wall (wood)
+];
+const COLLISION_COLUMNS = [
+  { x: -4, z: -10, radius: 0.35 }, { x: 4, z: -10, radius: 0.35 },
+  { x: -4, z: 2, radius: 0.35 },   { x: 4, z: 2, radius: 0.35 },
+  { x: -4, z: 14, radius: 0.35 },  { x: 4, z: 14, radius: 0.35 },
+];
+const MODEL_COL_RADIUS = 0.7;   // pedestal base half-diagonal ≈ 0.78
+const CAMERA_COL_RADIUS = 0.3;  // human shoulder width
 
-async function fetchPaintingSizes() {
-  try {
-    const resp = await fetch("api/painting-sizes");
-    PAINTING_SIZES = await resp.json();
-  } catch (e) {
-    console.error("Failed to fetch painting sizes", e);
-  }
-}
-
-async function fetchPaintingLayout() {
-  try {
-    const resp = await fetch("api/paintings-layout");
-    const data = await resp.json();
-    PAINTING_LAYOUT = data.layout;
-  } catch (e) {
-    console.error("Failed to fetch painting layout", e);
-    PAINTING_LAYOUT = null;
-  }
-}
-
-async function savePaintingLayout() {
-  const layout = PAINTING_OBJECTS.map(o => ({
-    fileName: o.data.fileName,
-    x: Math.round(o.data.x * 100) / 100,
-    y: Math.round(o.data.y * 100) / 100,
-    z: Math.round(o.data.z * 100) / 100,
-    rotY: o.data.rotY,
-    scale: o.data.scale,
-    cs: o.data.cs,
-    faceRotY: o.data.faceRotY
-  }));
-  try {
-    const resp = await fetch("api/paintings-layout", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(layout)
-    });
-    const result = await resp.json();
-    const st = document.getElementById("save-status");
-    if (result.ok) {
-      st.textContent = "✓ Saved!";
-      st.style.display = "inline";
-      setTimeout(() => { st.style.display = "none"; }, 2000);
-    } else {
-      st.textContent = "✗ Save failed";
-      st.style.display = "inline";
-      setTimeout(() => { st.style.display = "none"; }, 3000);
+function pushCircleOutOfAABB(cx, cz, radius, aabb) {
+  const clampX = Math.max(aabb.minX, Math.min(cx, aabb.maxX));
+  const clampZ = Math.max(aabb.minZ, Math.min(cz, aabb.maxZ));
+  const dx = cx - clampX;
+  const dz = cz - clampZ;
+  const distSq = dx * dx + dz * dz;
+  if (distSq < radius * radius) {
+    const dist = Math.sqrt(distSq);
+    if (dist < 0.0001) {
+      const overlapX = Math.min(cx - aabb.minX, aabb.maxX - cx);
+      const overlapZ = Math.min(cz - aabb.minZ, aabb.maxZ - cz);
+      if (overlapX < overlapZ) {
+        const sign = (cx - aabb.minX < aabb.maxX - cx) ? -1 : 1;
+        return { x: cx + sign * (overlapX + radius), z: cz };
+      } else {
+        const sign = (cz - aabb.minZ < aabb.maxZ - cz) ? -1 : 1;
+        return { x: cx, z: cz + sign * (overlapZ + radius) };
+      }
     }
-    return result.ok;
-  } catch (e) {
-    console.error("Save layout failed", e);
-    return false;
+    const nx = dx / dist;
+    const nz = dz / dist;
+    return { x: clampX + nx * radius, z: clampZ + nz * radius };
   }
+  return { x: cx, z: cz };
 }
 
-async function initDefaultLayout() {
-  // Show confirmation dialog
-  if (!confirm("确定要初始化布局吗？\n\n这将从 name.txt 读取所有图片名称，\n按默认布局重新分配到所有墙面。\n当前手动调整的布局将丢失。")) {
-    return;
+function pushCircleOutOfCircle(ax, az, aR, bx, bz, bR) {
+  const dx = ax - bx;
+  const dz = az - bz;
+  const distSq = dx * dx + dz * dz;
+  const minDist = aR + bR;
+  if (distSq < minDist * minDist) {
+    const dist = Math.sqrt(distSq);
+    if (dist < 0.0001) return { x: ax + minDist, z: az };
+    const overlap = minDist - dist;
+    const nx = dx / dist;
+    const nz = dz / dist;
+    return { x: ax + nx * overlap, z: az + nz * overlap };
   }
-  try {
-    // Fetch name map
-    const resp = await fetch("api/name-map");
-    const nameMap = await resp.json();
-    // Fetch painting list
-    const pResp = await fetch("api/paintings");
-    const pData = await pResp.json();
-    const paintings = pData.paintings || pData;
-    if (!paintings || paintings.length === 0) {
-      alert("没有找到图片文件！");
-      return;
-    }
-    // Build default layout from scratch
-    PAINTING_LAYOUT = buildDefaultPaintingLayout(paintings.length);
-    for (let i = 0; i < PAINTING_LAYOUT.length; i++) {
-      PAINTING_LAYOUT[i].fileName = paintings[i];
-    }
-    // Rebuild scene
-    rebuildAllPaintings();
-    buildWallButtons();
-    // Save to server
-    await savePaintingLayout();
-    selectPainting(-1);
-    console.log("Layout initialized:", PAINTING_OBJECTS.length, "paintings");
-  } catch (e) {
-    console.error("Init layout failed", e);
-    alert("初始化失败：" + e.message);
-  }
+  return { x: ax, z: az };
 }
 
+function getCollisionBoxes(excludeModelIdx) {
+  const models = [];
+  for (let i = 0; i < MODEL_OBJECTS.length; i++) {
+    if (i === excludeModelIdx) continue;
+    const obj = MODEL_OBJECTS[i];
+    if (!obj || !obj.loaded) continue;
+    const p = obj.data;
+    models.push({ type: 'circle', x: p.x, z: p.z, radius: MODEL_COL_RADIUS });
+  }
+  return { walls: COLLISION_WALLS, columns: COLLISION_COLUMNS, models };
+}
+
+function clampMovement(x, z, radius, excludeModelIdx) {
+  const { walls, columns, models } = getCollisionBoxes(excludeModelIdx);
+  let rx = x, rz = z;
+  const MAX_ITER = 8;
+  for (let iter = 0; iter < MAX_ITER; iter++) {
+    let pushed = false;
+    for (const w of walls) {
+      const res = pushCircleOutOfAABB(rx, rz, radius, w);
+      if (res.x !== rx || res.z !== rz) { rx = res.x; rz = res.z; pushed = true; }
+    }
+    for (const c of columns) {
+      const res = pushCircleOutOfCircle(rx, rz, radius, c.x, c.z, c.radius);
+      if (res.x !== rx || res.z !== rz) { rx = res.x; rz = res.z; pushed = true; }
+    }
+    for (const m of models) {
+      const res = pushCircleOutOfCircle(rx, rz, radius, m.x, m.z, m.radius);
+      if (res.x !== rx || res.z !== rz) { rx = res.x; rz = res.z; pushed = true; }
+    }
+    if (!pushed) break;
+  }
+  return { x: rx, z: rz };
+}
+let PAINTING_LAYOUT = [];
+let PAINTING_OBJECTS = [];
+let MODEL_LAYOUT = [];
+let MODEL_OBJECTS = [];
+// MODEL_LABELS removed — names shown on pedestal nameplate
+let SELECTED_IDX = -1;          // painting selection
+let SELECTED_MODEL_IDX = -1;    // model selection
+let EDIT_MODE = false;
+let EDIT_SUB_MODE = "paintings"; // "paintings" or "models"
+let loadedTextures = {};
+let isDragging = false;
+let isResizing = false;
+
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 renderer.setSize(window.innerWidth,window.innerHeight);
@@ -300,20 +261,21 @@ const scene=new THREE.Scene();
 scene.background=new THREE.Color(0x1a1a2e);
 scene.fog=new THREE.Fog(0x1a1a2e,20,55);
 const camera=new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,0.5,60);
-camera.position.set(0,1.7,14);
+camera.position.set(0,2.2,14);
 let pointerLocked=false;const euler=new THREE.Euler(0,0,0,"YXZ");const PI_2=Math.PI/2;
 let mvF=0,mvB=0,mvL=0,mvR=0;
 const vel=new THREE.Vector3();
 const clk=new THREE.Clock();
 let itgt=null;
 let loaded={};let _loading={};
-let pedestals=[];
-let selModel=null;
+let selModel=null; // orbit target
 let oAngle=0,oRad=3,oY=0;
 let orbiting=false;
 let lastStep=0;
 let actx=null;
 function snd(f,d,gv){if(!actx)try{actx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){return}const o=actx.createOscillator(),g=actx.createGain();o.type="sine";o.frequency.setValueAtTime(f,actx.currentTime);g.gain.setValueAtTime(gv,actx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,actx.currentTime+d);o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+d)}
+
+// ===================== BUILD MUSEUM (no pedestals) =====================
 function buildMuseum(){
   const fg=new THREE.PlaneGeometry(20,45);
   const floor=new THREE.Mesh(fg,new THREE.MeshStandardMaterial({color:0x2a1f14,roughness:0.3}));
@@ -333,21 +295,6 @@ function buildMuseum(){
   const colGeo=new THREE.CylinderGeometry(0.3,0.35,5,12);
   const colMat=new THREE.MeshStandardMaterial({color:0xe8dcc8,roughness:0.3,metalness:0.1});
   [[-4,-10],[4,-10],[-4,2],[4,2],[-4,14],[4,14]].forEach(([cx,cz])=>{const c=new THREE.Mesh(colGeo,colMat);c.position.set(cx,2.5,cz);scene.add(c);});
-  const pBase=new THREE.BoxGeometry(1.1,0.08,1.1),pCol=new THREE.CylinderGeometry(0.28,0.32,0.85,12),pTop=new THREE.BoxGeometry(1.05,0.05,1.05);
-  const pMat=new THREE.MeshStandardMaterial({color:0xf5f0e8,roughness:0.25,metalness:0.08}),pMat2=new THREE.MeshStandardMaterial({color:0xe0d8c8,roughness:0.3,metalness:0.05});
-  for(let i=0;i<POS.length;i++){
-    const [px,pz]=POS[i],group=new THREE.Group();group.position.set(px,0,pz);
-    const base=new THREE.Mesh(pBase,pMat);base.position.y=0.04;group.add(base);
-    const col=new THREE.Mesh(pCol,pMat2);col.position.y=0.5;group.add(col);
-    const top=new THREE.Mesh(pTop,pMat);top.position.y=0.94;group.add(top);
-    const ringGeo=new THREE.TorusGeometry(0.45,0.02,8,24);
-    const ringMat=new THREE.MeshStandardMaterial({color:0xccaaff,roughness:0.3,emissive:0xccaaff,emissiveIntensity:0.6});
-    const ring=new THREE.Mesh(ringGeo,ringMat);ring.rotation.x=Math.PI/2;ring.position.y=0.97;group.add(ring);
-    const plate=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.15,0.05),new THREE.MeshStandardMaterial({color:0x2a2a2a,roughness:0.4,metalness:0.3}));
-    plate.position.set(0,0.25,0.58);group.add(plate);
-    scene.add(group);pedestals.push({group,pos:[px,pz],index:i,loaded:false,model:null,ring});
-  }
-  console.log("Museum built:",pedestals.length);
 }
 function setupLights(){
   scene.add(new THREE.AmbientLight(0x5a5070,3));
@@ -362,11 +309,18 @@ dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5
 const loader=new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 
-function loadModel(idx){
-  if(pedestals[idx].loaded||loaded[idx]||_loading[idx])return;
-  _loading[idx]=true;
+// ===================== MODEL LOADING (from layout) =====================
+// MODEL_LAYOUT[i] = {fileName, x, z, rotY, scale}
+// MODEL_OBJECTS[i] = {group, data, loaded, label, ring}
+
+function loadModelFromLayout(idx){
+  const layout = MODEL_LAYOUT[idx];
+  if (!layout || loaded[idx] || _loading[idx]) return;
+  _loading[idx] = true;
   const ov=document.getElementById("loading"),lp=document.getElementById("lpct"),lt=document.getElementById("ltxt");
-  ov.style.display="block";lt.textContent="("+(pedestals.filter(p=>p.loaded).length+1)+"/"+MODELS.length+") "+MODELS[idx].substring(0,18)+"...";
+  ov.style.display="block";
+  const doneCount = Object.keys(loaded).filter(k=>loaded[k]).length;
+  lt.textContent="("+(doneCount+1)+"/"+MODELS.length+") "+MODELS[idx].substring(0,18)+"...";
   loader.load("assets/"+MODELS[idx],
     (gltf)=>{
       _loading[idx]=false;
@@ -374,30 +328,164 @@ function loadModel(idx){
       const box=new THREE.Box3().setFromObject(model);
       const size=box.getSize(new THREE.Vector3());
       const maxDim=Math.max(size.x,size.y,size.z);
-      const scale=1.2/maxDim;
+      const scale = layout.scale / maxDim;
       model.scale.setScalar(scale);
       const center=box.getCenter(new THREE.Vector3());
-      model.position.set(-center.x*scale,-box.min.y*scale,-center.z*scale);
-      loaded[idx]=model;pedestals[idx].loaded=true;pedestals[idx].model=model;
-      pedestals[idx].ring.material.color.set(0x44ff44);
-      pedestals[idx].ring.material.emissive.set(0x44ff44);
-      pedestals[idx].ring.material.emissiveIntensity=1.2;
-      model.position.y+=0.98;pedestals[idx].group.add(model);
-      const done=pedestals.filter(p=>p.loaded).length;
+      model.position.set(-center.x*scale, -box.min.y*scale, -center.z*scale);
+      const group = new THREE.Group();
+      group.position.set(layout.x, 0, layout.z);
+      group.rotation.y = layout.rotY;
+      // Pedestal
+      const pMat=new THREE.MeshStandardMaterial({color:0xf5f0e8,roughness:0.25,metalness:0.08});
+      const pMat2=new THREE.MeshStandardMaterial({color:0xe0d8c8,roughness:0.3,metalness:0.05});
+      const pBase=new THREE.Mesh(new THREE.BoxGeometry(1.1,0.08,1.1),pMat);pBase.position.y=0.04;group.add(pBase);
+      const pCol=new THREE.Mesh(new THREE.CylinderGeometry(0.28,0.32,0.85,12),pMat2);pCol.position.y=0.5;group.add(pCol);
+      const pTop=new THREE.Mesh(new THREE.BoxGeometry(1.05,0.05,1.05),pMat);pTop.position.y=0.94;group.add(pTop);
+      // Name plate: 放在平台上方, 高度为之前一半, 在模型正向(-Z)侧
+      const dispName = MODEL_NAME_MAP[MODELS[idx]] || MODELS[idx].replace(".glb","");
+      const pc = document.createElement("canvas");
+      pc.width = 256; pc.height = 48;
+      const pctx = pc.getContext("2d");
+      pctx.clearRect(0,0,256,48);
+      pctx.fillStyle = "rgba(0,0,0,0.85)";
+      pctx.fillRect(0,0,256,48);
+      pctx.strokeStyle = "rgba(255,215,0,0.35)";
+      pctx.lineWidth = 2;
+      pctx.strokeRect(2,2,252,44);
+      pctx.textAlign = "center"; pctx.textBaseline = "middle";
+      pctx.fillStyle = "#ffffff";
+      let fs = 20;
+      pctx.font = "bold "+fs+"px 'Microsoft YaHei',sans-serif";
+      let tw = pctx.measureText(dispName).width;
+      while(tw > 240 && fs > 12){ fs-=2; pctx.font="bold "+fs+"px 'Microsoft YaHei',sans-serif"; tw=pctx.measureText(dispName).width; }
+      pctx.fillText(dispName, 128, 26);
+      const plateTex = new THREE.CanvasTexture(pc);
+      const plate=new THREE.Mesh(
+        new THREE.BoxGeometry(0.8,0.225,0.05),
+        new THREE.MeshStandardMaterial({map: plateTex, roughness:0.4,metalness:0.3})
+      );
+      plate.position.set(0, 1.0525, -0.5);
+      group.add(plate);
+      model.position.y = 0.98;
+      group.add(model);
+      scene.add(group);
+
+      // Selection ring (initially hidden)
+      const ringGeo = new THREE.TorusGeometry(0.6, 0.03, 8, 24);
+      const ringMat = new THREE.MeshStandardMaterial({
+        color: 0xffd700, roughness: 0.2, emissive: 0xffd700,
+        emissiveIntensity: 0.6, transparent: true, opacity: 0.7
+      });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI / 2;
+      ring.position.set(layout.x, 0.01, layout.z);
+      ring.visible = false;
+      scene.add(ring);
+
+      MODEL_OBJECTS[idx] = { group, data: layout, loaded: true, model, ring };
+      loaded[idx] = true;
+      const done=Object.keys(loaded).filter(k=>loaded[k]).length;
       lp.textContent=Math.round(done/MODELS.length*100)+"%";
-      console.log("Loaded #"+idx+" ("+done+"/"+MODELS.length+")");
+      console.log("Loaded model #"+idx+" ("+done+"/"+MODELS.length+")");
       if(done>=MODELS.length){ov.style.display="none";}
     },
     (xhr)=>{if(xhr.total){lp.textContent=Math.round(xhr.loaded/xhr.total*100)+"%";lt.textContent=(xhr.loaded/1048576).toFixed(1)+" / "+(xhr.total/1048576).toFixed(1)+" MB";}},
-    (err)=>{_loading[idx]=false;ov.style.display="none";console.error("Load fail",err);}
+    (err)=>{_loading[idx]=false;ov.style.display="none";console.error("Model load fail",err);}
   );
 }
-function loadAllModels(){
-  for(let i=0;i<MODELS.length;i++){
-    loadModel(i);
+
+function loadAllModelsFromLayout() {
+  for (let i = 0; i < Math.min(MODEL_LAYOUT.length, MODELS.length); i++) {
+    loadModelFromLayout(i);
   }
 }
 
+function rebuildAllModels() {
+  // Remove existing model objects
+  for (const obj of MODEL_OBJECTS) {
+    if (obj) {
+      scene.remove(obj.group);
+      scene.remove(obj.ring);
+    }
+  }
+  // (labels removed; names on pedestal nameplate)
+  MODEL_OBJECTS = [];
+  loaded = {};
+  _loading = {};
+
+  for (let i = 0; i < Math.min(MODEL_LAYOUT.length, MODELS.length); i++) {
+    MODEL_LAYOUT[i].fileName = MODELS[i];
+  }
+  loadAllModelsFromLayout();
+}
+
+function updateModelPosition(idx) {
+  const obj = MODEL_OBJECTS[idx];
+  if (!obj) return;
+  const p = obj.data;
+  obj.group.position.set(p.x, p.y || 0, p.z);
+  obj.group.rotation.y = p.rotY;
+  obj.ring.position.set(p.x, 0.01, p.z);
+}
+
+function selectModel(idx) {
+  // Deselect previous
+  if (SELECTED_MODEL_IDX >= 0 && SELECTED_MODEL_IDX < MODEL_OBJECTS.length) {
+    const prev = MODEL_OBJECTS[SELECTED_MODEL_IDX];
+    if (prev && prev.ring) prev.ring.visible = false;
+  }
+  SELECTED_MODEL_IDX = idx;
+  if (idx >= 0 && idx < MODEL_OBJECTS.length) {
+    const obj = MODEL_OBJECTS[idx];
+    if (obj && obj.ring) {
+      obj.ring.visible = true;
+      const p = obj.data;
+      document.getElementById("model-info").textContent =
+        MODEL_NAME_MAP[MODELS[idx]] || MODELS[idx] + " x:"+p.x.toFixed(2)+" z:"+p.z.toFixed(2)+" r:"+(p.rotY*180/Math.PI).toFixed(0)+"° s:"+p.scale.toFixed(2);
+      document.getElementById("model-info").style.display = "inline";
+    }
+  } else {
+    document.getElementById("model-info").textContent = "";
+    document.getElementById("model-info").style.display = "none";
+  }
+}
+
+function getModelIntersects(clientX, clientY) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  const meshes = [];
+  for (let i = 0; i < MODEL_OBJECTS.length; i++) {
+    if (MODEL_OBJECTS[i]) {
+      MODEL_OBJECTS[i].group.traverse((child) => {
+        if (child.isMesh) meshes.push(child);
+      });
+    }
+  }
+  return raycaster.intersectObjects(meshes, false);
+}
+
+function moveModel(e, obj, p, mv) {
+  e.preventDefault();
+  switch (e.code) {
+    case "KeyA": p.x -= mv; break;
+    case "KeyD": p.x += mv; break;
+    case "KeyW": if (e.shiftKey) { p.y = (p.y||0) + mv; } else { p.z -= mv; } break;
+    case "KeyS": if (e.shiftKey) { p.y = (p.y||0) - mv; } else { p.z += mv; } break;
+    case "KeyR": p.rotY -= 0.087; break; // ~5° CCW
+    case "KeyF": p.rotY += 0.087; break; // ~5° CW
+  }
+  const clampedMv = clampMovement(p.x, p.z, MODEL_COL_RADIUS, SELECTED_MODEL_IDX);
+  p.x = Math.max(-11.5, Math.min(11.5, clampedMv.x));
+  p.z = Math.max(-21.5, Math.min(23.5, clampedMv.z));
+  p.y = Math.max(-0.5, Math.min(4.5, p.y || 0));
+  updateModelPosition(SELECTED_MODEL_IDX);
+  selectModel(SELECTED_MODEL_IDX);
+  updateMinimap();
+}
+
+// ===================== PAINTING CODE (unchanged) =====================
 function computePaintingSize(fileName, scaleMult=1) {
   const REF_H = 1.0;
   const sz = PAINTING_SIZES[fileName];
@@ -417,9 +505,6 @@ function createPaintingObjects(fileName, pos) {
   const px=pos.x, py=pos.y, pz=pos.z, rotY=pos.rotY;
   const frameW = 0.08;
   const faceRotY = pos.faceRotY !== undefined ? pos.faceRotY : rotY + Math.PI;
-
-  // FRAME — now also uses cs offset (moves with canvas/label)
-  // Offset direction: use rotY (wall surface direction) — same as canvas/label
   function csDir(val) {
     const r = rotY;
     if (r === 0 || r === Math.PI) return {dx:0, dz:val};
@@ -433,11 +518,8 @@ function createPaintingObjects(fileName, pos) {
   );
   frame.position.set(px+fd.dx, py, pz+fd.dz);
   frame.rotation.y = rotY;
-
-  // CANVAS (slightly in front of frame toward viewer direction)
   const canMat = new THREE.MeshBasicMaterial({color:0xffffff, side:THREE.DoubleSide});
   const canvas = new THREE.Mesh(new THREE.BoxGeometry(pw, ph, 0.008), canMat);
-  // Extra 0.03 offset toward the viewer (faceRotY direction) so canvas floats in front of frame
   let cx2=px, cz2=pz;
   if (faceRotY === 0) { cz2 = pz + (pos.cs||0)*CS_SCALE + 0.03; }
   else if (faceRotY === Math.PI) { cz2 = pz + (pos.cs||0)*CS_SCALE - 0.03; }
@@ -445,14 +527,11 @@ function createPaintingObjects(fileName, pos) {
   else if (faceRotY === -Math.PI/2) { cx2 = px + (pos.cs||0)*CS_SCALE - 0.03; }
   canvas.position.set(cx2, py, cz2);
   canvas.rotation.y = faceRotY;
-
   const textureLoader = new THREE.TextureLoader();
   textureLoader.load("assets/images/"+fileName, (tex)=>{
     canMat.map = tex;
     canMat.needsUpdate = true;
   }, undefined, (err)=>{console.error("Texture fail:", fileName, err);});
-
-  // LABEL
   const lh = 0.18, lw = Math.min(pw * 1.15, 1.8);
   const lc = document.createElement("canvas");
   lc.width = 1024; lc.height = 60;
@@ -467,19 +546,14 @@ function createPaintingObjects(fileName, pos) {
   let tw = lx.measureText(dispName).width;
   while(tw > 1000 && fs > 12){ fs-=2; lx.font="bold "+fs+"px 'Microsoft YaHei',sans-serif"; tw=lx.measureText(dispName).width; }
   lx.fillText(dispName, 512, 32);
-
   const label = new THREE.Mesh(
     new THREE.PlaneGeometry(lw, lh),
-    new THREE.MeshBasicMaterial({
-      map: new THREE.CanvasTexture(lc), transparent: true,
-      depthWrite: false, side: THREE.DoubleSide,
-    })
+    new THREE.MeshBasicMaterial({map: new THREE.CanvasTexture(lc), transparent: true, depthWrite: false, side: THREE.DoubleSide})
   );
   const ld = csDir(csOff);
   label.position.set(px+ld.dx, py - ph/2 - 0.12, pz+ld.dz);
   label.rotation.y = faceRotY;
   label.scale.x = getLabelScale(rotY, faceRotY);
-
   return {frame, canvas, label, canMat, pw, ph};
 }
 
@@ -490,23 +564,15 @@ function rebuildAllPaintings() {
     scene.remove(obj.label);
   }
   PAINTING_OBJECTS = [];
-  hideCSArrow(); // Clear any stale cs arrow
-
+  hideCSArrow();
   for (let i = 0; i < PAINTING_LAYOUT.length; i++) {
     const pos = PAINTING_LAYOUT[i];
     const objs = createPaintingObjects(pos.fileName, pos);
     scene.add(objs.frame);
     scene.add(objs.canvas);
     scene.add(objs.label);
-    PAINTING_OBJECTS.push({
-      frame: objs.frame, canvas: objs.canvas, label: objs.label,
-      canMat: objs.canMat, pw: objs.pw, ph: objs.ph,
-      data: { ...pos }
-    });
-    console.log("paint ["+i+"]", pos.fileName, "pos:", pos.x.toFixed(2), pos.y.toFixed(2), pos.z.toFixed(2),
-      "rotY:", pos.rotY.toFixed(2), "cs:", pos.cs, "faceRotY:", pos.faceRotY?.toFixed(2));
+    PAINTING_OBJECTS.push({frame: objs.frame, canvas: objs.canvas, label: objs.label, canMat: objs.canMat, pw: objs.pw, ph: objs.ph, data: { ...pos }});
   }
-  console.log("Paintings rebuilt:", PAINTING_OBJECTS.length);
 }
 
 function loadAllPaintings(){
@@ -533,26 +599,9 @@ function loadAllPaintings(){
   }
   rebuildAllPaintings();
   buildWallButtons();
-  console.log("Paintings placed:", PAINTING_OBJECTS.length);
 }
 
-function findNearest(){
-  const cp=camera.position.clone();let n=null,d=3.5;
-  for(let i=0;i<pedestals.length;i++){
-    const p=pedestals[i];const dx=cp.x-p.pos[0],dz=cp.z-p.pos[1];
-    const dist=Math.sqrt(dx*dx+dz*dz);if(dist<d){d=dist;n=i;}
-  }
-  return n;
-}
-function updateInfo(){
-  const nearest=findNearest();
-  if(nearest!==null){
-    document.getElementById("hall").textContent=HALLS[nearest];
-    document.getElementById("exh").textContent="Exhibit #"+(nearest+1)+(pedestals[nearest].loaded?" [Loaded]":" [Loading...]");
-    document.getElementById("hint").textContent=pedestals[nearest].loaded?"Scroll zoom  Drag rotate  Press E to orbit":"Approaching...";
-    itgt=nearest;
-  }else{document.getElementById("hall").textContent="Corridor";document.getElementById("exh").textContent="";document.getElementById("hint").textContent="Walk to explore";itgt=null;}
-}
+// ===================== MINIMAP =====================
 function updateMinimap(){
   const cv=document.getElementById("mm");
   const displayW=190, displayH=220;
@@ -561,124 +610,72 @@ function updateMinimap(){
   const ctx=cv.getContext("2d");
   const w=cv.width, h=cv.height;
   ctx.clearRect(0,0,w,h);ctx.fillStyle="rgba(0,0,0,0.6)";ctx.fillRect(0,0,w,h);
-
-  // Museum true dimensions:
-  //   x: -11 ~ 11  (22 wide)
-  //   z: -21 ~ 23  (44 deep)
-  //   Inner walls: x=±5.2 (along Z from -15 to 5), z=17.5 (along X from -5.2 to 5.2)
-  //   Columns: (-4,-10),(4,-10),(-4,2),(4,2),(-4,14),(4,14)
-  //   Pedestals: positions from POS array
   const mapW = 22, mapD = 44;
   const pad = 16*rs;
   const availW = w - pad*2, availH = h - pad*2;
   const scale = Math.min(availW/mapW, availH/mapD);
   const ox = (w - mapW*scale)/2, oy = (h - mapD*scale)/2;
-  // 3D coordinate mapping:
-  //   X: -11(left) → +11(right)  maps to canvas X (left→right)
-  //   Z: -21(back) → +23(front)  maps to canvas Y (top→bottom)
   function mx(x){return ox + (x + 11)*scale;}
   function mz(z){return oy + (z + 21)*scale;}
-  // For readability: draw walls as thick lines on a dark background
   ctx.fillStyle="rgba(30,25,20,0.5)";ctx.fillRect(ox,oy,mapW*scale,mapD*scale);
-
-  // Wall stroke style
   ctx.strokeStyle="#b0a090";
   ctx.lineWidth=2.5*rs;
   ctx.lineCap="round";
-
-  // Draw solid walls as lines (maps to actual museum wall positions)
   const walls = [
-    // Outer walls
-    [[-11,-21],[11,-21]],  // back wall (z=-21)
-    [[-11,23],[11,23]],    // front wall (z=23)
-    [[-11,-21],[-11,23]],  // left wall (x=-11)
-    [[11,-21],[11,23]],    // right wall (x=11)
-    // Inner walls
-    [[-5.2,-15],[-5.2,5]],   // inner left (x=-5.2)
-    [[5.2,-15],[5.2,5]],     // inner right (x=5.2)
-    [[-5.2,17.5],[5.2,17.5]], // partition at z=17.5
+    [[-11,-21],[11,-21]],
+    [[-11,23],[11,23]],
+    [[-11,-21],[-11,23]],
+    [[11,-21],[11,23]],
+    [[-5.2,-15],[-5.2,5]],
+    [[5.2,-15],[5.2,5]],
+    [[-5.2,17.5],[5.2,17.5]],
   ];
   for (const [[x1,z1],[x2,z2]] of walls) {
-    ctx.beginPath();
-    ctx.moveTo(mx(x1), mz(z1));
-    ctx.lineTo(mx(x2), mz(z2));
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(mx(x1), mz(z1));
+    ctx.lineTo(mx(x2), mz(z2)); ctx.stroke();
   }
-
-  // Draw columns as small circles
   ctx.fillStyle="#7a6a5a";
   const cols = [[-4,-10],[4,-10],[-4,2],[4,2],[-4,14],[4,14]];
-  for (const [cx,cz] of cols) {
-    ctx.beginPath();
-    ctx.arc(mx(cx), mz(cz), 2.5*rs, 0, Math.PI*2);
-    ctx.fill();
-  }
-
-  // Wall number labels — position them slightly off the wall surface on the painting side
+  for (const [cx,cz] of cols) { ctx.beginPath(); ctx.arc(mx(cx), mz(cz), 2.5*rs, 0, Math.PI*2); ctx.fill(); }
   ctx.font="bold "+Math.round(13*rs)+"px sans-serif";
   ctx.textAlign="center"; ctx.textBaseline="middle";
   ctx.fillStyle="#ffd700";
   const labels = [
-    {num:"①", x:-5.2+1.5, z:-3},    // wall 1, hall side (+X)
-    {num:"②", x:5.2-1.5, z:-3},     // wall 2, hall side (-X)
-    {num:"③", x:11+1.5, z:-5},      // wall 3 (outer right)
-    {num:"④", x:-11-1.5, z:-5},     // wall 4 (outer left)
-    {num:"⑤", x:0, z:24.5},         // wall 5 (front)
-    {num:"⑥", x:0, z:-22.5},        // wall 6 (back)
-    {num:"⑦", x:0, z:18.8},         // wall 7 (partition, main side)
-    {num:"⑧", x:-5.2-1.5, z:-3},    // wall 8, corridor side (-X)
-    {num:"⑨", x:5.2+1.5, z:-3},     // wall 9, corridor side (+X)
-    {num:"⑩", x:0, z:16.2},         // wall 10 (partition, entrance side)
+    {num:"①", x:-5.2+1.5, z:-3},{num:"②", x:5.2-1.5, z:-3},{num:"③", x:11+1.5, z:-5},{num:"④", x:-11-1.5, z:-5},
+    {num:"⑤", x:0, z:24.5},{num:"⑥", x:0, z:-22.5},{num:"⑦", x:0, z:18.8},{num:"⑧", x:-5.2-1.5, z:-3},
+    {num:"⑨", x:5.2+1.5, z:-3},{num:"⑩", x:0, z:16.2},
   ];
-  for (const lb of labels) {
-    ctx.fillText(lb.num, mx(lb.x), mz(lb.z));
+  for (const lb of labels) ctx.fillText(lb.num, mx(lb.x), mz(lb.z));
+  // Paintings as red dots
+  for (const obj of PAINTING_OBJECTS) {
+    const p = obj.data;
+    ctx.fillStyle = "#ff4444";
+    ctx.beginPath(); ctx.arc(mx(p.x), mz(p.z), 2*rs, 0, Math.PI*2); ctx.fill();
   }
-
-  // Draw paintings as small red dots
-  if (PAINTING_OBJECTS) {
-    for (const obj of PAINTING_OBJECTS) {
-      const p = obj.data;
-      ctx.fillStyle = "#ff4444";
-      ctx.beginPath();
-      ctx.arc(mx(p.x), mz(p.z), 2*rs, 0, Math.PI*2);
-      ctx.fill();
-    }
+  // Models as cyan triangles
+  for (const obj of MODEL_OBJECTS) {
+    if (!obj || !obj.loaded) continue;
+    const p = obj.data;
+    const angle = p.rotY;
+    const sx = mx(p.x), sy = mz(p.z);
+    const sz = 3*rs;
+    ctx.fillStyle = "#44ccff";
+    ctx.beginPath();
+    ctx.moveTo(sx + Math.cos(angle)*sz, sy + Math.sin(angle)*sz);
+    ctx.lineTo(sx + Math.cos(angle+2.5)*sz, sy + Math.sin(angle+2.5)*sz);
+    ctx.lineTo(sx + Math.cos(angle-2.5)*sz, sy + Math.sin(angle-2.5)*sz);
+    ctx.closePath(); ctx.fill();
   }
-
-  // Draw pedestals (3D sculptures)
-  for (const p of pedestals) {
-    ctx.fillStyle = p.loaded ? "#44ff44" : "#666";
-    const sz = p.loaded ? 3.5*rs : 2.5*rs;
-    ctx.fillRect(mx(p.pos[0])-sz/2, mz(p.pos[1])-sz/2, sz, sz);
-    // Small dot inside for visibility
-    if (p.loaded) {
-      ctx.fillStyle = "#aaffaa";
-      ctx.beginPath();
-      ctx.arc(mx(p.pos[0]), mz(p.pos[1]), 1*rs, 0, Math.PI*2);
-      ctx.fill();
-    }
-  }
-
-  // Draw user position (camera)
+  // User
   const cx=camera.position.x, cz=camera.position.z;
-  ctx.beginPath();
-  ctx.arc(mx(cx), mz(cz), 3.5*rs, 0, Math.PI*2);
-  ctx.fillStyle="#ffff44";
-  ctx.fill();
-  ctx.strokeStyle="#fff";
-  ctx.lineWidth=1.5*rs;
-  ctx.stroke();
-
-  // Draw user facing direction
+  ctx.beginPath(); ctx.arc(mx(cx), mz(cz), 3.5*rs, 0, Math.PI*2);
+  ctx.fillStyle="#ffff44"; ctx.fill();
+  ctx.strokeStyle="#fff"; ctx.lineWidth=1.5*rs; ctx.stroke();
   const dir=new THREE.Vector3(0,0,-1);
   dir.applyQuaternion(camera.quaternion);
-  const lineLen = 1.8;
-  ctx.beginPath();
-  ctx.moveTo(mx(cx), mz(cz));
-  ctx.lineTo(mx(cx+dir.x*lineLen), mz(cz+dir.z*lineLen));
-  ctx.strokeStyle="#ffff44";
-  ctx.lineWidth=2.5*rs;
-  ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(mx(cx), mz(cz));
+  ctx.lineTo(mx(cx+dir.x*1.8), mz(cz+dir.z*1.8));
+  ctx.strokeStyle="#ffff44"; ctx.lineWidth=2.5*rs; ctx.stroke();
 }
 
 // ===================== WALL LABELS (Edit Mode) =====================
@@ -686,7 +683,6 @@ let wallLabels = [];
 
 function showWallLabels() {
   hideWallLabels();
-  // Only show labels for walls that actually have paintings
   const hasPaintings = new Array(ALL_WALLS.length).fill(false);
   for (const po of PAINTING_OBJECTS) {
     const wi = getWallIndex(po.data);
@@ -696,48 +692,30 @@ function showWallLabels() {
     if (!hasPaintings[idx]) return;
     const num = idx + 1;
     const canvas = document.createElement("canvas");
-    canvas.width = 256;
-    canvas.height = 256;
+    canvas.width = 256; canvas.height = 256;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, 256, 256);
-    ctx.beginPath();
-    ctx.arc(128, 128, 100, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(255, 215, 0, 0.85)";
-    ctx.fill();
-    ctx.strokeStyle = "#fff";
-    ctx.lineWidth = 6;
-    ctx.stroke();
+    ctx.beginPath(); ctx.arc(128, 128, 100, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255, 215, 0, 0.85)"; ctx.fill();
+    ctx.strokeStyle = "#fff"; ctx.lineWidth = 6; ctx.stroke();
     ctx.fillStyle = "#1a1a1a";
     ctx.font = "bold 80px sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
     ctx.fillText(num.toString(), 128, 132);
-
     const texture = new THREE.CanvasTexture(canvas);
-    const label = new THREE.Sprite(
-      new THREE.SpriteMaterial({map: texture, transparent: true, depthWrite: false})
-    );
+    const label = new THREE.Sprite(new THREE.SpriteMaterial({map: texture, transparent: true, depthWrite: false}));
     let lx = 0, ly = 2.5, lz = 0;
-    if (w.xStart !== undefined) {
-      lx = (w.xStart + w.xEnd) / 2;
-      lz = w.z;
-    } else {
-      lx = w.x;
-      lz = (w.zStart + w.zEnd) / 2;
-    }
+    if (w.xStart !== undefined) { lx = (w.xStart + w.xEnd) / 2; lz = w.z; }
+    else { lx = w.x; lz = (w.zStart + w.zEnd) / 2; }
     const cs = w.cs || 0;
-    if (w.xStart !== undefined) {
-      lz += cs * 0.8;
-    } else {
-      lx += cs * 0.8;
-    }
-    // Extra separation for walls that share the same physical surface
-    if (idx === 0) { lx += 1.0; lz += 0.8; }   // wall ① (paired with ⑧)
-    if (idx === 7) { lx -= 1.0; lz -= 0.8; }   // wall ⑧ (paired with ①)
-    if (idx === 1) { lx -= 1.0; lz += 0.8; }   // wall ② (paired with ⑨)
-    if (idx === 8) { lx += 1.0; lz -= 0.8; }   // wall ⑨ (paired with ②)
-    if (idx === 6) { lx += 1.2; lz += 0.8; }   // wall ⑦ (paired with ⑩)
-    if (idx === 9) { lx -= 1.2; lz -= 0.8; }   // wall ⑩ (paired with ⑦)
+    if (w.xStart !== undefined) lz += cs * 0.8;
+    else lx += cs * 0.8;
+    if (idx === 0) { lx += 1.0; lz += 0.8; }
+    if (idx === 7) { lx -= 1.0; lz -= 0.8; }
+    if (idx === 1) { lx -= 1.0; lz += 0.8; }
+    if (idx === 8) { lx += 1.0; lz -= 0.8; }
+    if (idx === 6) { lx += 1.2; lz += 0.8; }
+    if (idx === 9) { lx -= 1.2; lz -= 0.8; }
     label.position.set(lx, 2.5, lz);
     label.scale.set(0.8, 0.8, 1);
     scene.add(label);
@@ -746,38 +724,25 @@ function showWallLabels() {
 }
 
 function hideWallLabels() {
-  for (const l of wallLabels) {
-    scene.remove(l);
-    l.material.dispose();
-  }
+  for (const l of wallLabels) { scene.remove(l); l.material.dispose(); }
   wallLabels = [];
 }
 
-// ===================== SELECTION =====================
+// ===================== SELECTION (Paintings) =====================
 function selectPainting(idx) {
-  // Hide CS arrow when selection changes
-  if (csArrowGroup) {
-    hideCSArrow();
+  if (csArrowGroup) hideCSArrow();
+  if (SELECTED_IDX >= 0 && SELECTED_IDX < PAINTING_OBJECTS.length) {
+    const prev = PAINTING_OBJECTS[SELECTED_IDX];
+    if (prev.frame) prev.frame.material = new THREE.MeshStandardMaterial({color:0x4a3728,roughness:0.6,metalness:0.1});
   }
-
-  if (selectedIdx >= 0 && selectedIdx < PAINTING_OBJECTS.length) {
-    const prev = PAINTING_OBJECTS[selectedIdx];
-    if (prev.frame) {
-      prev.frame.material = new THREE.MeshStandardMaterial({color:0x4a3728,roughness:0.6,metalness:0.1});
-    }
-  }
-  selectedIdx = idx;
+  SELECTED_IDX = idx;
   if (idx >= 0 && idx < PAINTING_OBJECTS.length) {
     const obj = PAINTING_OBJECTS[idx];
     if (obj.frame) {
-      obj.frame.material = new THREE.MeshStandardMaterial({
-        color:0x4a3728,roughness:0.6,metalness:0.1,
-        emissive: new THREE.Color(0xffd700), emissiveIntensity: 0.25
-      });
+      obj.frame.material = new THREE.MeshStandardMaterial({color:0x4a3728,roughness:0.6,metalness:0.1,emissive: new THREE.Color(0xffd700), emissiveIntensity: 0.25});
     }
     updateWallButtonHighlight(idx);
     updatePaintingInfo(obj);
-    // Show cs direction arrow after a brief delay to let rendering settle
     setTimeout(() => { updateCSArrow(obj); }, 100);
   } else {
     document.getElementById("painting-info").textContent = "";
@@ -797,96 +762,54 @@ function getPaintingIntersects(clientX, clientY) {
   return raycaster.intersectObjects(meshes);
 }
 
-// ===================== GET WALL INDEX =====================
 function getWallIndex(p) {
-  let bestIdx = -1;
-  let bestDist = Infinity;
+  let bestIdx = -1, bestDist = Infinity;
   for (let i = 0; i < ALL_WALLS.length; i++) {
     const w = ALL_WALLS[i];
-    // Find closest wall surface based ONLY on physical position
     let cx, cz;
-    if (w.xStart !== undefined) {
-      // Z-oriented wall: fixed z, paintings arranged along X
-      cx = Math.max(w.xStart, Math.min(w.xEnd, p.x));
-      cz = w.z;
-    } else {
-      // X-oriented wall: fixed x, paintings arranged along Z
-      cx = w.x;
-      cz = Math.max(w.zStart, Math.min(w.zEnd, p.z));
-    }
-    const dx = p.x - cx, dz = p.z - cz;
-    const dist = Math.sqrt(dx * dx + dz * dz);
-    if (dist < bestDist && dist < 0.6) {
-      bestDist = dist;
-      bestIdx = i;
-    }
+    if (w.xStart !== undefined) { cx = Math.max(w.xStart, Math.min(w.xEnd, p.x)); cz = w.z; }
+    else { cx = w.x; cz = Math.max(w.zStart, Math.min(w.zEnd, p.z)); }
+    const dist = Math.sqrt((p.x - cx)**2 + (p.z - cz)**2);
+    if (dist < bestDist && dist < 0.6) { bestDist = dist; bestIdx = i; }
   }
-  // If we found a position match, also verify the wall orientation matches
   if (bestIdx >= 0) {
     const w = ALL_WALLS[bestIdx];
-    // Check rotY match (allow small floating point tolerance)
     if (Math.abs(w.rotY - p.rotY) > 0.05) {
-      // rotY mismatch — try harder: maybe the painting was rotated after placement
-      // Still allow the match if they share faceRotY or the position is very close
       if (w.faceRotY !== undefined && p.faceRotY !== undefined) {
-        if (Math.abs(w.faceRotY - p.faceRotY) > 0.05) {
-          // Neither rotY nor faceRotY match — reject this match
-          bestIdx = -1;
-        }
-      } else {
-        bestIdx = -1;
-      }
+        if (Math.abs(w.faceRotY - p.faceRotY) > 0.05) bestIdx = -1;
+      } else bestIdx = -1;
     }
   }
   return bestIdx;
 }
 
-// ===================== MOVE TO WALL =====================
 function moveToWall(obj, wallIdx) {
   const w = ALL_WALLS[wallIdx];
   if (!w) return;
   const p = obj.data;
-
   p.rotY = w.rotY;
   p.cs = w.cs || 0;
   p.faceRotY = w.faceRotY !== undefined ? w.faceRotY : w.rotY + Math.PI;
-  if (w.xStart !== undefined) {
-    p.x = (w.xStart + w.xEnd) / 2;
-    p.z = w.z;
-  } else {
-    p.z = (w.zStart + w.zEnd) / 2;
-    p.x = w.x;
-  }
+  if (w.xStart !== undefined) { p.x = (w.xStart + w.xEnd) / 2; p.z = w.z; }
+  else { p.z = (w.zStart + w.zEnd) / 2; p.x = w.x; }
   p.y = 2.2;
-  updateSinglePainting(selectedIdx);
-  selectPainting(selectedIdx);
-
-  // Move camera to stand in front of the painting
-  // faceRotY = direction the canvas normal points (the direction the painting faces)
-  // Camera stands BEHIND the painting in the OPPOSITE direction, looking toward the painting
-  // So camera is at p - sin(faceRY)*dist, p - cos(faceRY)*dist
-  // and looks at (p.x, p.y, p.z)
+  updateSinglePainting(SELECTED_IDX);
+  selectPainting(SELECTED_IDX);
   const dist = 3.0;
   const faceRY = p.faceRotY !== undefined ? p.faceRotY : p.rotY + Math.PI;
-  // Camera stands in the faceRotY direction (in front of the painting)
-  // faceRotY = direction the canvas normal points = the side the viewer should stand
-  // offset = +faceRotY direction = (sin(faceRY), cos(faceRY))
   let cx = p.x + Math.sin(faceRY) * dist;
   let cz = p.z + Math.cos(faceRY) * dist;
   cx = Math.max(-12, Math.min(12, cx));
   cz = Math.max(-20, Math.min(24, cz));
   camera.position.set(cx, Math.max(1.5, p.y), cz);
-  // Camera looks toward the painting center, regardless of which side it's on
   camera.lookAt(p.x, p.y, p.z);
   euler.setFromQuaternion(camera.quaternion);
   updateMinimap();
 }
 
-// Build wall selection buttons in edit panel
 function buildWallButtons() {
   const container = document.getElementById("wall-buttons");
   container.innerHTML = "";
-  // Show buttons for all 10 walls
   ALL_WALLS.forEach((w, idx) => {
     const btn = document.createElement("button");
     btn.className = "wall-btn";
@@ -894,41 +817,22 @@ function buildWallButtons() {
     btn.dataset.wallIdx = idx;
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (selectedIdx < 0 || selectedIdx >= PAINTING_OBJECTS.length) return;
-      moveToWall(PAINTING_OBJECTS[selectedIdx], idx);
+      if (SELECTED_IDX < 0 || SELECTED_IDX >= PAINTING_OBJECTS.length) return;
+      moveToWall(PAINTING_OBJECTS[SELECTED_IDX], idx);
     });
     container.appendChild(btn);
   });
 }
 
-// Highlight the button matching the currently selected painting's wall
 function updatePaintingInfo(obj) {
   const p = obj.data;
   const wi = getWallIndex(p);
-  console.log("updatePaintingInfo rotY="+p.rotY+" cs="+p.cs+" x="+p.x.toFixed(2)+" z="+p.z.toFixed(2)+" wi="+wi);
   const wallNum = wi >= 0 ? wi + 1 : "-";
-  const dim = obj.pw >= obj.ph ? "🌄 横向" : "📐 纵向";
+  const dim = obj.pw >= obj.ph ? "🌄" : "📐";
   let info = "墙" + wallNum + " ";
-  // Walls 1,2,3,4,8,9 → X-axis walls (use X coords)
-  // Walls 5,6,7,10 → Z-axis walls (use Z coords)
-  const isZWall = p.rotY === r0 || p.rotY === rP; // rotY 0/PI = wall normal along Z
-  if (isZWall) {
-    // Z-wall (5,6,7,10): fixed z, painting moves along X → show Z coords
-    if (wi >= 0) {
-      const w = ALL_WALLS[wi];
-      info += "墙面Z:" + (w.z !== undefined ? w.z.toFixed(2) : "0") + " 画Z:" + p.z.toFixed(2);
-    } else {
-      info += "画Z:" + p.z.toFixed(2);
-    }
-  } else {
-    // X-wall (1,2,3,4,8,9): fixed x, painting moves along Z → show X coords
-    if (wi >= 0) {
-      const w = ALL_WALLS[wi];
-      info += "墙面X:" + (w.x !== undefined ? w.x.toFixed(2) : "0") + " 画X:" + p.x.toFixed(2);
-    } else {
-      info += "画X:" + p.x.toFixed(2);
-    }
-  }
+  const isZWall = p.rotY === r0 || p.rotY === rP;
+  if (isZWall) info += "Z:" + p.z.toFixed(2);
+  else info += "X:" + p.x.toFixed(2);
   info += " " + dim;
   document.getElementById("painting-info").textContent = info;
 }
@@ -939,77 +843,24 @@ function updateWallButtonHighlight(paintingIdx) {
   if (paintingIdx < 0 || paintingIdx >= PAINTING_OBJECTS.length) return;
   const p = PAINTING_OBJECTS[paintingIdx].data;
   const wi = getWallIndex(p);
-  if (wi >= 0 && wi < btns.length) {
-    btns[wi].classList.add("active");
-  }
+  if (wi >= 0 && wi < btns.length) btns[wi].classList.add("active");
 }
 
-// Snap distance threshold — how close a painting must be to a wall to auto-snap
 const SNAP_DIST = 0.6;
-
-function snapToNearestWall(p) {
-  // Check distance to each wall surface, snap if close enough
-  let bestWall = null;
-  let bestDist = SNAP_DIST;
-  for (const w of ALL_WALLS) {
-    let dx, dz;
-    if (w.xStart !== undefined) {
-      // Wall runs along X axis at fixed z
-      const wallZ = w.z;
-      const clampedX = Math.max(w.xStart, Math.min(w.xEnd, p.x));
-      dx = p.x - clampedX;
-      dz = p.z - wallZ;
-    } else {
-      // Wall runs along Z axis at fixed x
-      const wallX = w.x;
-      const clampedZ = Math.max(w.zStart, Math.min(w.zEnd, p.z));
-      dx = p.x - wallX;
-      dz = p.z - clampedZ;
-    }
-    const dist = Math.sqrt(dx * dx + dz * dz);
-    if (dist < bestDist) {
-      bestDist = dist;
-      bestWall = w;
-    }
-  }
-  if (bestWall) {
-    // Snap to this wall
-    const newRotY = bestWall.rotY;
-    const changedWall = newRotY !== p.rotY;
-    p.rotY = newRotY;
-    p.cs = bestWall.cs || 0;
-    p.faceRotY = bestWall.faceRotY !== undefined ? bestWall.faceRotY : bestWall.rotY + Math.PI;
-    if (bestWall.xStart !== undefined) {
-      p.x = Math.max(bestWall.xStart, Math.min(bestWall.xEnd, p.x));
-      p.z = bestWall.z;
-    } else {
-      p.z = Math.max(bestWall.zStart, Math.min(bestWall.zEnd, p.z));
-      p.x = bestWall.x;
-    }
-    return changedWall;
-  }
-  return false;
-}
 
 function updatePaintingMeshPositions(obj) {
   const p = obj.data;
-  // Clamp to museum bounds
   p.x = Math.max(-11.5, Math.min(11.5, p.x));
   p.z = Math.max(-21.5, Math.min(23.5, p.z));
   p.y = Math.max(0.8, Math.min(4.5, p.y));
   const {pw, ph} = computePaintingSize(p.fileName, p.scale);
   const faceRY = p.faceRotY !== undefined ? p.faceRotY : p.rotY + Math.PI;
-  function csDir(val) {
-    const r = p.rotY;
-    if (r === 0 || r === Math.PI) return {dx:0, dz:val};
-    else return {dx:val, dz:0};
-  }
+  function csDir(val) { const r = p.rotY; if (r === 0 || r === Math.PI) return {dx:0, dz:val}; else return {dx:val, dz:0}; }
   const cs = (p.cs||0) * CS_SCALE;
   const fd = csDir(cs);
   obj.frame.position.set(p.x+fd.dx, p.y, p.z+fd.dz);
   obj.frame.rotation.y = p.rotY;
   const cd = csDir(cs);
-  // Extra 0.03 in faceRotY direction so canvas floats in front of frame
   const extraDir = {dx:0, dz:0};
   if (faceRY === 0) extraDir.dz = 0.03;
   else if (faceRY === Math.PI) extraDir.dz = -0.03;
@@ -1030,20 +881,13 @@ function updateSinglePainting(idx) {
   const {pw, ph} = computePaintingSize(p.fileName, p.scale);
   const frameW = 0.08;
   const dispName = NAME_MAP[p.fileName] || p.fileName.replace(".jpg","");
-
-  // Dispose old geometries and materials
   obj.frame.geometry.dispose();
   obj.frame.material.dispose();
   obj.canvas.geometry.dispose();
   obj.label.geometry.dispose();
   obj.label.material.dispose();
-
-  // Recreate frame geometry
   obj.frame.geometry = new THREE.BoxGeometry(pw + frameW*2, ph + frameW*2, 0.05);
-  // Recreate canvas geometry
-  const oldMat = obj.canvas.material;
   obj.canvas.geometry = new THREE.BoxGeometry(pw, ph, 0.008);
-  // Recreate label
   const lh = 0.18, lw = Math.min(pw * 1.15, 1.8);
   const lc = document.createElement("canvas");
   lc.width = 1024; lc.height = 60;
@@ -1059,25 +903,15 @@ function updateSinglePainting(idx) {
   while(tw > 1000 && fs > 12){ fs-=2; lx.font="bold "+fs+"px 'Microsoft YaHei',sans-serif"; tw=lx.measureText(dispName).width; }
   lx.fillText(dispName, 512, 32);
   obj.label.geometry = new THREE.PlaneGeometry(lw, lh);
-  obj.label.material = new THREE.MeshBasicMaterial({
-    map: new THREE.CanvasTexture(lc), transparent: true,
-    depthWrite: false, side: THREE.DoubleSide,
-  });
+  obj.label.material = new THREE.MeshBasicMaterial({map: new THREE.CanvasTexture(lc), transparent: true, depthWrite: false, side: THREE.DoubleSide});
   obj.label.scale.x = getLabelScale(p.rotY, p.faceRotY);
-
-  // Reposition everything — use faceRotY for cs offset direction
   const faceRY = p.faceRotY !== undefined ? p.faceRotY : p.rotY + Math.PI;
-  function csDir(val) {
-    const r = p.rotY;
-    if (r === 0 || r === Math.PI) return {dx:0, dz:val};
-    else return {dx:val, dz:0};
-  }
+  function csDir(val) { const r = p.rotY; if (r === 0 || r === Math.PI) return {dx:0, dz:val}; else return {dx:val, dz:0}; }
   const cs = (p.cs||0) * CS_SCALE;
   const fd = csDir(cs);
   obj.frame.position.set(p.x+fd.dx, p.y, p.z+fd.dz);
   obj.frame.rotation.y = p.rotY;
   const cd = csDir(cs);
-  // Extra 0.03 in faceRotY direction so canvas floats in front of frame
   const extraDir = {dx:0, dz:0};
   if (faceRY === 0) extraDir.dz = 0.03;
   else if (faceRY === Math.PI) extraDir.dz = -0.03;
@@ -1091,63 +925,30 @@ function updateSinglePainting(idx) {
   obj.pw = pw; obj.ph = ph;
 }
 
-// Edit mode state
-let EDIT_MODE = false;
-
-// CS direction arrow indicator — a small 3D arrow mesh shown on selected painting
+// ===================== CS ARROW =====================
 let csArrowGroup = null;
 
 function createCSArrow() {
-  if (csArrowGroup) {
-    scene.remove(csArrowGroup);
-    csArrowGroup = null;
-  }
+  if (csArrowGroup) { scene.remove(csArrowGroup); csArrowGroup = null; }
   csArrowGroup = new THREE.Group();
-
-  // Arrow body (cone + cylinder)
   const arrowLen = 0.25;
   const arrowMat = new THREE.MeshBasicMaterial({ color: 0xff4444 });
-
-  // Arrow shaft
-  const shaft = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.008, 0.008, arrowLen * 0.6, 8),
-    arrowMat
-  );
+  const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, arrowLen * 0.6, 8), arrowMat);
   shaft.rotation.z = -Math.PI / 2;
   shaft.position.x = arrowLen * CS_SCALE;
   csArrowGroup.add(shaft);
-
-  // Arrow head (cone)
-  const head = new THREE.Mesh(
-    new THREE.ConeGeometry(0.03, arrowLen * 0.4, 8),
-    arrowMat
-  );
+  const head = new THREE.Mesh(new THREE.ConeGeometry(0.03, arrowLen * 0.4, 8), arrowMat);
   head.rotation.z = -Math.PI / 2;
   head.position.x = arrowLen * 0.8;
   csArrowGroup.add(head);
-
-  // Glow ring
   const glowMat = new THREE.SpriteMaterial({
-    map: (() => {
-      const c = document.createElement("canvas");
-      c.width = 64; c.height = 64;
-      const ctx = c.getContext("2d");
-      const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      grad.addColorStop(0, "rgba(255,68,68,0.4)");
-      grad.addColorStop(1, "rgba(255,68,68,0)");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 64, 64);
-      return new THREE.CanvasTexture(c);
-    })(),
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending
+    map: (()=>{const c=document.createElement("canvas");c.width=64;c.height=64;const ctx=c.getContext("2d");const g=ctx.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,"rgba(255,68,68,0.4)");g.addColorStop(1,"rgba(255,68,68,0)");ctx.fillStyle=g;ctx.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);})(),
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
   });
   const glow = new THREE.Sprite(glowMat);
   glow.position.x = arrowLen * 0.8;
   glow.scale.set(0.3, 0.3, 1);
   csArrowGroup.add(glow);
-
   scene.add(csArrowGroup);
 }
 
@@ -1157,146 +958,185 @@ function updateCSArrow(obj) {
   const p = obj.data;
   const pw = obj.pw || 1.0;
   const ph = obj.ph || 1.0;
-
-  // Arrow shows the direction the painting faces (faceRotY direction)
   const faceRY = p.faceRotY !== undefined ? p.faceRotY : p.rotY + Math.PI;
   const arrowOffsetX = pw / 2 + 0.25;
   let ax, ay, az, aRot;
-
-  // Arrow placement perpendicular to face direction, arrow points along face direction
-  if (faceRY === 0) {
-    // Facing +Z: arrow to the right (+X), pointing +Z
-    ax = p.x + arrowOffsetX; ay = p.y + ph/2 + 0.1; az = p.z;
-    aRot = 0;
-  } else if (faceRY === Math.PI) {
-    // Facing -Z: arrow to the right (-X), pointing -Z
-    ax = p.x - arrowOffsetX; ay = p.y + ph/2 + 0.1; az = p.z;
-    aRot = Math.PI;
-  } else if (faceRY === Math.PI/2) {
-    // Facing +X: arrow above (+Z), pointing +X
-    ax = p.x; ay = p.y + ph/2 + 0.1; az = p.z + arrowOffsetX;
-    aRot = Math.PI/2;
-  } else {
-    // Facing -X: arrow above (-Z), pointing -X
-    ax = p.x; ay = p.y + ph/2 + 0.1; az = p.z - arrowOffsetX;
-    aRot = -Math.PI/2;
-  }
-
+  if (faceRY === 0) { ax = p.x + arrowOffsetX; ay = p.y + ph/2 + 0.1; az = p.z; aRot = 0; }
+  else if (faceRY === Math.PI) { ax = p.x - arrowOffsetX; ay = p.y + ph/2 + 0.1; az = p.z; aRot = Math.PI; }
+  else if (faceRY === Math.PI/2) { ax = p.x; ay = p.y + ph/2 + 0.1; az = p.z + arrowOffsetX; aRot = Math.PI/2; }
+  else { ax = p.x; ay = p.y + ph/2 + 0.1; az = p.z - arrowOffsetX; aRot = -Math.PI/2; }
   csArrowGroup.position.set(ax, ay, az);
   csArrowGroup.rotation.y = aRot;
   csArrowGroup.visible = true;
 }
 
-function hideCSArrow() {
-  if (csArrowGroup) csArrowGroup.visible = false;
-}
+function hideCSArrow() { if (csArrowGroup) csArrowGroup.visible = false; }
 
+// ===================== EDIT MODE TOGGLE =====================
 function toggleEditMode() {
   EDIT_MODE = !EDIT_MODE;
   if (EDIT_MODE) {
-    // Enter edit mode: show panel, wall labels
     const panel = document.getElementById("edit-panel");
-    panel.style.display = "block";
+    panel.style.display = "flex";
     showWallLabels();
-    // Lock pointer while in edit mode for clicking paintings
     renderer.domElement.requestPointerLock();
     selectPainting(-1);
-    // Hide movement UI
+    selectModel(-1);
     document.getElementById("ui").style.opacity = "0";
-    setTimeout(() => {
-      document.getElementById("ui").style.display = "none";
-    }, 500);
+    setTimeout(() => { document.getElementById("ui").style.display = "none"; }, 500);
     const badge = document.getElementById("edit-mode-badge");
     if (badge) badge.style.display = "block";
   } else {
-    // Exit edit mode: hide panel, wall labels, cs arrow
     const panel = document.getElementById("edit-panel");
     panel.style.display = "none";
     hideWallLabels();
     hideCSArrow();
     selectPainting(-1);
-    // Show movement UI
+    selectModel(-1);
     document.getElementById("ui").style.display = "block";
     document.getElementById("ui").style.opacity = "1";
     const badge = document.getElementById("edit-mode-badge");
     if (badge) badge.style.display = "none";
-    // Exit pointer lock
-    if (document.pointerLockElement === renderer.domElement) {
-      document.exitPointerLock();
-    }
-    // Reset camera to prevent drift
+    if (document.pointerLockElement === renderer.domElement) document.exitPointerLock();
     euler.setFromQuaternion(camera.quaternion);
   }
 }
 
-function movePainting(e, obj, p, mv) {
-  e.preventDefault();
-  let curWall;
-  switch (e.code) {
-    case "KeyA": // move left along wall surface (Z for X-walls, X for Z-walls)
-      if (p.rotY === 0 || p.rotY === Math.PI) {
-        p.x -= Math.cos(p.rotY) * mv;
-      } else {
-        p.z += Math.sin(p.rotY) * mv;
-      }
-      break;
-    case "KeyD": // move right along wall surface
-      if (p.rotY === 0 || p.rotY === Math.PI) {
-        p.x += Math.cos(p.rotY) * mv;
-      } else {
-        p.z -= Math.sin(p.rotY) * mv;
-      }
-      break;
-    case "KeyW": // move up (Y+)
-      p.y += mv;
-      break;
-    case "KeyS": // move down (Y-)
-      p.y -= mv;
-      break;
-    case "KeyE": // flip cs direction (painting facing toward/away from hallway)
-      p.cs = -(p.cs || 0);
-      // Also flip faceRotY when cs flips (canvas should face the opposite way)
-      // faceRotY is the direction the canvas plane normal points.
-      // When cs flips, the canvas needs to face the opposite direction from the wall
-      // so it still faces the viewer (who is now on the other side).
-      if (p.faceRotY !== undefined) {
-        // Flip faceRotY by adding/subtracting PI
-        p.faceRotY = (p.faceRotY + Math.PI) % (Math.PI * 2);
-      }
-      break;
-    case "KeyQ": // move to next wall
-      curWall = getWallIndex(p);
-      if (curWall >= 0) {
-        const nextWall = (curWall + 1) % ALL_WALLS.length;
-        moveToWall(obj, nextWall);
-        return; // moveToWall already calls updateSinglePainting + selectPainting
-      }
-      break;
-  }
-  updateSinglePainting(selectedIdx);
-  selectPainting(selectedIdx);
-  updateMinimap();
-  // Update the cs arrow after position change
-  if (selectedIdx >= 0) {
-    updateCSArrow(PAINTING_OBJECTS[selectedIdx]);
+function switchEditSubMode(mode) {
+  EDIT_SUB_MODE = mode;
+  const paintBtn = document.getElementById("smb-paintings");
+  const modelBtn = document.getElementById("smb-models");
+  if (mode === "paintings") {
+    paintBtn.className = "submode-btn active"; paintBtn.style.cssText = "";
+    modelBtn.className = "submode-btn inactive"; modelBtn.style.cssText = "";
+    document.getElementById("wall-select-label").style.display = "inline";
+    document.getElementById("wall-buttons").style.display = "inline";
+    document.getElementById("painting-info").style.display = "inline";
+    document.getElementById("model-info").style.display = "none";
+    document.getElementById("edit-mode-badge").textContent = "⚡ 编辑画作 | 点击画选中 | 点墙面数字移动 | WS上下 AD左右 | Q下一面墙 | E翻转方向 | R拉远 F拉近 | Z保存+输出数据 | 滚轮缩放 | Tab退出";
+    selectModel(-1);
+    selectPainting(SELECTED_IDX);
+    showWallLabels();
+  } else {
+    paintBtn.className = "submode-btn inactive"; paintBtn.style.cssText = "";
+    modelBtn.className = "submode-btn active"; modelBtn.style.cssText = "";
+    document.getElementById("wall-select-label").style.display = "none";
+    document.getElementById("wall-buttons").style.display = "none";
+    document.getElementById("painting-info").style.display = "none";
+    document.getElementById("model-info").style.display = SELECTED_MODEL_IDX >= 0 ? "inline" : "none";
+    document.getElementById("edit-mode-badge").textContent = "⚡ 编辑模型 | 点击模型选中 | WASD水平移动 | Shift+W/S升降 | R/F旋转 | 滚轮缩放 | Z保存+输出数据 | M切换画作 | Tab退出";
+    selectPainting(-1);
+    hideCSArrow();
+    hideWallLabels();
   }
 }
 
-// ===================== LAYOUT LOADING =====================
-let PAINTING_LAYOUT = [];
-let PAINTING_OBJECTS = [];
-let selectedIdx = -1;
-let loadedTextures = {};
-let isDragging = false;
-let isResizing = false;
+// ===================== PAINTING MOVE =====================
+function movePainting(e, obj, p, mv) {
+  e.preventDefault();
+  switch (e.code) {
+    case "KeyA":
+      if (p.rotY === 0 || p.rotY === Math.PI) p.x -= Math.cos(p.rotY) * mv;
+      else p.z += Math.sin(p.rotY) * mv;
+      break;
+    case "KeyD":
+      if (p.rotY === 0 || p.rotY === Math.PI) p.x += Math.cos(p.rotY) * mv;
+      else p.z -= Math.sin(p.rotY) * mv;
+      break;
+    case "KeyW": p.y += mv; break;
+    case "KeyS": p.y -= mv; break;
+    case "KeyE":
+      p.cs = -(p.cs || 0);
+      if (p.faceRotY !== undefined) p.faceRotY = (p.faceRotY + Math.PI) % (Math.PI * 2);
+      break;
+    case "KeyQ":
+      const curWall = getWallIndex(p);
+      if (curWall >= 0) { moveToWall(obj, (curWall + 1) % ALL_WALLS.length); return; }
+      break;
+  }
+  updateSinglePainting(SELECTED_IDX);
+  selectPainting(SELECTED_IDX);
+  updateMinimap();
+  if (SELECTED_IDX >= 0) updateCSArrow(PAINTING_OBJECTS[SELECTED_IDX]);
+}
+
+// ===================== SAVE/LOAD =====================
+async function savePaintingLayout() {
+  const layout = PAINTING_OBJECTS.map(o => ({
+    fileName: o.data.fileName,
+    x: Math.round(o.data.x * 100) / 100,
+    y: Math.round(o.data.y * 100) / 100,
+    z: Math.round(o.data.z * 100) / 100,
+    rotY: o.data.rotY,
+    scale: o.data.scale,
+    cs: o.data.cs,
+    faceRotY: o.data.faceRotY
+  }));
+  try {
+    const resp = await fetch("api/paintings-layout", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(layout) });
+    const result = await resp.json();
+    const st = document.getElementById("save-status");
+    if (result.ok) { st.textContent = "✓ Saved!"; st.style.display = "inline"; setTimeout(() => { st.style.display = "none"; }, 2000); }
+    else { st.textContent = "✗ Save failed"; st.style.display = "inline"; setTimeout(() => { st.style.display = "none"; }, 3000); }
+    return result.ok;
+  } catch (e) { console.error("Save failed", e); return false; }
+}
+
+async function saveModelLayout() {
+  const layout = [];
+  for (let i = 0; i < MODEL_OBJECTS.length; i++) {
+    const obj = MODEL_OBJECTS[i];
+    if (!obj) continue;
+    const p = obj.data;
+    layout.push({ fileName: MODELS[i], x: Math.round(p.x*100)/100, y: Math.round((p.y||0)*100)/100, z: Math.round(p.z*100)/100, rotY: Math.round(p.rotY*100)/100, scale: Math.round(p.scale*100)/100 });
+  }
+  try {
+    const resp = await fetch("api/models-layout", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(layout) });
+    const result = await resp.json();
+    const st = document.getElementById("save-status");
+    if (result.ok) { st.textContent = "✓ Saved!"; st.style.display = "inline"; setTimeout(() => { st.style.display = "none"; }, 2000); }
+    else { st.textContent = "✗ Save failed"; st.style.display = "inline"; setTimeout(() => { st.style.display = "none"; }, 3000); }
+    return result.ok;
+  } catch (e) { console.error("Save model layout failed", e); return false; }
+}
+
+async function initDefaultLayout() {
+  if (!confirm("确定要初始化画作布局吗？\n\n这将从 name.txt 读取所有图片名称，\n按默认布局重新分配到所有墙面。\n当前手动调整的布局将丢失。")) return;
+  try {
+    const resp = await fetch("api/name-map");
+    const nameMap = await resp.json();
+    const pResp = await fetch("api/paintings");
+    const pData = await pResp.json();
+    const paintings = pData.paintings || pData;
+    if (!paintings || paintings.length === 0) { alert("没有找到图片文件！"); return; }
+    PAINTING_LAYOUT = buildDefaultPaintingLayout(paintings.length);
+    for (let i = 0; i < PAINTING_LAYOUT.length; i++) PAINTING_LAYOUT[i].fileName = paintings[i];
+    rebuildAllPaintings();
+    buildWallButtons();
+    await savePaintingLayout();
+    selectPainting(-1);
+  } catch (e) { console.error("Init layout failed", e); alert("初始化失败：" + e.message); }
+}
+
+async function initDefaultModelLayout() {
+  if (!confirm("确定要初始化模型布局吗？\n\n这将重置所有模型到默认位置。\n当前手动调整的布局将丢失。")) return;
+  try {
+    const mResp = await fetch("api/models");
+    const mData = await mResp.json();
+    const models = mData.models;
+    if (!models || models.length === 0) { alert("没有找到模型文件！"); return; }
+    MODEL_LAYOUT = buildDefaultModelLayout(models.length);
+    rebuildAllModels();
+    await saveModelLayout();
+    selectModel(-1);
+  } catch (e) { console.error("Init model layout failed", e); }
+}
 
 async function loadLayout() {
   try {
     const resp = await fetch("api/paintings-layout");
     const data = await resp.json();
-    if (data && data.layout && Array.isArray(data.layout)) {
-      return data.layout;
-    }
+    if (data && data.layout && Array.isArray(data.layout)) return data.layout;
     return [];
   } catch (e) {
     console.error("Failed to load layout", e);
@@ -1304,108 +1144,159 @@ async function loadLayout() {
   }
 }
 
-// Edit mode UI
-document.getElementById("btn-save-layout").addEventListener("click", savePaintingLayout);
-document.getElementById("btn-close-edit").addEventListener("click", toggleEditMode);
-document.getElementById("btn-init-layout").addEventListener("click", initDefaultLayout);
+async function fetchModelLayout() {
+  try {
+    const resp = await fetch("api/models-layout");
+    const data = await resp.json();
+    MODEL_LAYOUT = data.layout;
+  } catch (e) {
+    console.error("Failed to fetch model layout", e);
+    MODEL_LAYOUT = null;
+  }
+}
 
-// Enter Museum button
-document.getElementById("btn-enter").addEventListener("click", ()=>{
-  renderer.domElement.requestPointerLock();
+async function fetchModelNameMap() {
+  try {
+    const resp = await fetch("api/model-name-map");
+    MODEL_NAME_MAP = await resp.json();
+  } catch (e) {
+    console.error("Failed to fetch model name map", e);
+  }
+}
+
+// ===================== EVENT LISTENERS =====================
+document.getElementById("btn-save-layout").addEventListener("click", () => {
+  if (EDIT_SUB_MODE === "paintings") savePaintingLayout();
+  else saveModelLayout();
 });
+document.getElementById("btn-close-edit").addEventListener("click", toggleEditMode);
+document.getElementById("btn-init-layout").addEventListener("click", () => {
+  if (EDIT_SUB_MODE === "paintings") initDefaultLayout();
+  else initDefaultModelLayout();
+});
+document.getElementById("smb-paintings").addEventListener("click", () => switchEditSubMode("paintings"));
+document.getElementById("smb-models").addEventListener("click", () => switchEditSubMode("models"));
+document.getElementById("btn-enter").addEventListener("click", () => { renderer.domElement.requestPointerLock(); });
 
-// Edit mode key state
-let editKeyF = 0, editKeyB = 0, editKeyL = 0, editKeyR = 0;
-
-document.addEventListener("keydown",(e)=>{
+document.addEventListener("keydown", (e) => {
   if (e.code === "Tab") { e.preventDefault(); toggleEditMode(); return; }
-  if (EDIT_MODE && selectedIdx >= 0) {
-    const mv = 0.05;
-    const obj = PAINTING_OBJECTS[selectedIdx];
-    const p = obj.data;
-    switch(e.code) {
-      case "KeyA":case "KeyD":case "KeyW":case "KeyS":case "KeyQ":case "KeyE":{
-        if (e.code === "KeyQ" && e.repeat) return; // block repeat for wall switch
-        movePainting(e, obj, p, mv);
-        return;
+  if (EDIT_MODE) {
+    // Mode switch
+    if (e.code === "KeyM") {
+      e.preventDefault();
+      switchEditSubMode(EDIT_SUB_MODE === "paintings" ? "models" : "paintings");
+      return;
+    }
+    if (EDIT_SUB_MODE === "paintings" && SELECTED_IDX >= 0) {
+      const mv = 0.05;
+      const obj = PAINTING_OBJECTS[SELECTED_IDX];
+      const p = obj.data;
+      switch(e.code) {
+        case "KeyA":case "KeyD":case "KeyW":case "KeyS":case "KeyQ":case "KeyE":
+          if (e.code === "KeyQ" && e.repeat) return;
+          movePainting(e, obj, p, mv);
+          return;
+        case "KeyF":
+          p.cs = Math.round(((p.cs || 0.03) + 0.01) * 1000) / 1000;
+          updateSinglePainting(SELECTED_IDX);
+          selectPainting(SELECTED_IDX);
+          return;
+        case "KeyR":
+          p.cs = Math.round(((p.cs || 0.03) - 0.01) * 1000) / 1000;
+          updateSinglePainting(SELECTED_IDX);
+          selectPainting(SELECTED_IDX);
+          return;
+        case "KeyZ":
+          savePaintingLayout();
+          console.log("=== Painting Data (copy this) ===");
+          console.log(JSON.stringify({fileName: p.fileName, x: Math.round(p.x*100)/100, y: Math.round(p.y*100)/100, z: Math.round(p.z*100)/100, rotY: p.rotY, scale: Math.round(p.scale*100)/100, cs: p.cs, faceRotY: p.faceRotY}, null, 2));
+          return;
       }
-      case "KeyF": // increase cs offset (push canvas further from wall)
-        p.cs = Math.round(((p.cs || 0.03) + 0.01) * 1000) / 1000;
-        updateSinglePainting(selectedIdx);
-        selectPainting(selectedIdx);
-        return;
-      case "KeyR": // decrease cs offset (pull canvas closer to wall)
-        p.cs = Math.round(((p.cs || 0.03) - 0.01) * 1000) / 1000;
-        updateSinglePainting(selectedIdx);
-        selectPainting(selectedIdx);
-        return;
-      case "KeyZ": // save + output selected painting data to console
-        savePaintingLayout();
-        // Output the selected painting's full data to console
-        console.log("=== Painting Data (copy this) ===");
-        console.log(JSON.stringify({
-          fileName: p.fileName,
-          x: Math.round(p.x*100)/100,
-          y: Math.round(p.y*100)/100,
-          z: Math.round(p.z*100)/100,
-          rotY: p.rotY,
-          scale: Math.round(p.scale*100)/100,
-          cs: p.cs,
-          faceRotY: p.faceRotY
-        }, null, 2));
-        return;
+      return;
+    }
+    if (EDIT_SUB_MODE === "models" && SELECTED_MODEL_IDX >= 0) {
+      const mv = 0.05;
+      const obj = MODEL_OBJECTS[SELECTED_MODEL_IDX];
+      if (!obj) return;
+      const p = obj.data;
+      switch(e.code) {
+        case "KeyA":case "KeyD":case "KeyW":case "KeyS":case "KeyR":case "KeyF":
+          moveModel(e, obj, p, mv);
+          return;
+        case "KeyZ":
+          saveModelLayout();
+          console.log("=== Model Data (copy this) ===");
+          console.log(JSON.stringify({fileName: MODELS[SELECTED_MODEL_IDX], x: Math.round(p.x*100)/100, y: Math.round((p.y||0)*100)/100, z: Math.round(p.z*100)/100, rotY: Math.round(p.rotY*100)/100, scale: Math.round(p.scale*100)/100}, null, 2));
+          return;
+      }
+      return;
     }
     return;
   }
   switch(e.code){case "KeyW":mvF=1;break;case "KeyS":mvB=1;break;case "KeyA":mvL=1;break;case "KeyD":mvR=1;break;
-    case "KeyE":if(itgt!==null&&pedestals[itgt].loaded){enterOrbit(itgt);}break;}
+    case "KeyE":if(itgt!==null&&itgt<MODEL_OBJECTS.length&&MODEL_OBJECTS[itgt]&&MODEL_OBJECTS[itgt].loaded){enterOrbit(itgt);}break;
+    case "BracketLeft":camera.position.y=Math.max(0.5,camera.position.y-0.3);break;
+    case "BracketRight":camera.position.y=Math.min(5.0,camera.position.y+0.3);break;}
 });
 document.addEventListener("keyup",(e)=>{
-  if (EDIT_MODE) return; // no movement repeats needed for ASDF step movement
+  if (EDIT_MODE) return;
   switch(e.code){case "KeyW":mvF=0;break;case "KeyS":mvB=0;break;case "KeyA":mvL=0;break;case "KeyD":mvR=0;break;}
 });
+
 let dragging=false,pm={x:0,y:0};
 renderer.domElement.addEventListener("click",(e)=>{
   if (EDIT_MODE) {
-    const hits = getPaintingIntersects(e.clientX, e.clientY);
-    if (hits.length > 0) {
-      for (let i = 0; i < PAINTING_OBJECTS.length; i++) {
-        if (hits[0].object === PAINTING_OBJECTS[i].frame || hits[0].object === PAINTING_OBJECTS[i].canvas) {
-          selectPainting(i);
-          break;
+    if (EDIT_SUB_MODE === "paintings") {
+      const hits = getPaintingIntersects(e.clientX, e.clientY);
+      if (hits.length > 0) {
+        for (let i = 0; i < PAINTING_OBJECTS.length; i++) {
+          if (hits[0].object === PAINTING_OBJECTS[i].frame || hits[0].object === PAINTING_OBJECTS[i].canvas) {
+            selectPainting(i); break;
+          }
         }
-      }
-    } else if (hits.length === 0) {
-      selectPainting(-1);
+      } else selectPainting(-1);
+    } else {
+      const hits = getModelIntersects(e.clientX, e.clientY);
+      if (hits.length > 0) {
+        for (let i = 0; i < MODEL_OBJECTS.length; i++) {
+          if (!MODEL_OBJECTS[i]) continue;
+          let found = false;
+          MODEL_OBJECTS[i].group.traverse((child) => {
+            if (child === hits[0].object) found = true;
+          });
+          if (found) { selectModel(i); break; }
+        }
+      } else selectModel(-1);
     }
     return;
   }
   if(!pointerLocked&&!orbiting)renderer.domElement.requestPointerLock();
 });
+
 document.addEventListener("pointerlockchange",()=>{
   pointerLocked=document.pointerLockElement===renderer.domElement;
   if(pointerLocked){
     euler.setFromQuaternion(camera.quaternion);
     const ui=document.getElementById("ui");ui.style.opacity="0";setTimeout(()=>{ui.style.display="none"},500);
   }else{
-    mvF=0;mvB=0;mvL=0;mvR=0; // stop any WASD movement
+    mvF=0;mvB=0;mvL=0;mvR=0;
     isDragging=false; isResizing=false;
     euler.setFromQuaternion(camera.quaternion);
     if (!EDIT_MODE) {
       orbiting=false;selModel=null;document.getElementById("popup").style.display="none";
       const ui=document.getElementById("ui");ui.style.display="block";ui.style.opacity="1";
-    } else {
-      // In edit mode, keep UI hidden when pointer lock is released
     }
   }
 });
+
 document.addEventListener("mousemove",(e)=>{
   if (EDIT_MODE) {
-    const hits = getPaintingIntersects(e.clientX, e.clientY);
-    if (hits.length > 0) {
-      renderer.domElement.style.cursor = "pointer";
+    if (EDIT_SUB_MODE === "paintings") {
+      const hits = getPaintingIntersects(e.clientX, e.clientY);
+      renderer.domElement.style.cursor = hits.length > 0 ? "pointer" : "default";
     } else {
-      renderer.domElement.style.cursor = "default";
+      const hits = getModelIntersects(e.clientX, e.clientY);
+      renderer.domElement.style.cursor = hits.length > 0 ? "pointer" : "default";
     }
     return;
   }
@@ -1416,77 +1307,160 @@ document.addEventListener("mousemove",(e)=>{
   euler.x=Math.max(-PI_2,Math.min(PI_2,euler.x));
   camera.quaternion.setFromEuler(euler);
 });
-renderer.domElement.addEventListener("mousedown",(e)=>{
-  if (EDIT_MODE) return;
-  if(selModel!==null&&e.button===0){dragging=true;pm={x:0,y:0};}
-});
 
+renderer.domElement.addEventListener("mousedown",(e)=>{ if (EDIT_MODE) return; if(selModel!==null&&e.button===0){dragging=true;pm={x:0,y:0};} });
 renderer.domElement.addEventListener("mouseup",(e)=>{ if (!EDIT_MODE) dragging=false; });
+
 renderer.domElement.addEventListener("wheel",(e)=>{
-  if (EDIT_MODE && selectedIdx >= 0 && !isDragging) {
-    e.preventDefault();
-    const obj = PAINTING_OBJECTS[selectedIdx];
-    let newScale = Math.round((obj.data.scale + (e.deltaY > 0 ? -0.05 : 0.05)) * 100) / 100;
-    obj.data.scale = newScale;
-    updateSinglePainting(selectedIdx);
-    selectPainting(selectedIdx);
-    return;
+  if (EDIT_MODE) {
+    if (EDIT_SUB_MODE === "paintings" && SELECTED_IDX >= 0 && !isDragging) {
+      e.preventDefault();
+      const obj = PAINTING_OBJECTS[SELECTED_IDX];
+      let newScale = Math.round((obj.data.scale + (e.deltaY > 0 ? -0.05 : 0.05)) * 100) / 100;
+      obj.data.scale = newScale;
+      updateSinglePainting(SELECTED_IDX);
+      selectPainting(SELECTED_IDX);
+      return;
+    }
+    if (EDIT_SUB_MODE === "models" && SELECTED_MODEL_IDX >= 0 && !isDragging) {
+      e.preventDefault();
+      const obj = MODEL_OBJECTS[SELECTED_MODEL_IDX];
+      if (!obj) { return; }
+      obj.data.scale = Math.max(0.3, Math.min(5.0, obj.data.scale + (e.deltaY > 0 ? -0.05 : 0.05)));
+      // Rebuild model with new scale
+      const idx = SELECTED_MODEL_IDX;
+      scene.remove(obj.group);
+      scene.remove(obj.ring);
+      delete MODEL_OBJECTS[idx];
+      loaded[idx] = false;
+      MODEL_LAYOUT[idx] = obj.data;
+      loadModelFromLayout(idx);
+      selectModel(-1);
+      return;
+    }
   }
   if(orbiting){oRad+=e.deltaY*0.01;oRad=Math.max(1.5,Math.min(8,oRad));}
 },{passive:false});
+
 window.addEventListener("resize",()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
 document.getElementById("pcls").addEventListener("click",()=>{document.getElementById("popup").style.display="none";});
+document.getElementById("minimap").addEventListener("click",()=>{ document.getElementById("minimap").classList.toggle("fullscreen"); });
 
-// Minimap fullscreen toggle
-document.getElementById("minimap").addEventListener("click",()=>{
-  document.getElementById("minimap").classList.toggle("fullscreen");
-});
+// ===================== ORBIT =====================
 function enterOrbit(idx){
   if(orbiting&&selModel===idx){exitOrbit();return;}
   selModel=idx;orbiting=true;oAngle=0;oRad=3;oY=0.5;
-  document.getElementById("ptitle").textContent="Exhibit #"+(idx+1);
-  document.getElementById("pbody").textContent="Model: "+MODELS[idx].substring(0,16)+"...  Hall: "+HALLS[idx]+"  Drag rotate  Scroll zoom  Press E to exit orbit";
+  document.getElementById("ptitle").textContent=MODEL_NAME_MAP[MODELS[idx]] || "展品 #"+(idx+1);
+  document.getElementById("pbody").textContent="模型: "+MODELS[idx].substring(0,16)+"  拖动旋转  滚轮缩放  按E退出浏览";
   document.getElementById("popup").style.display="block";
 }
 function exitOrbit(){orbiting=false;selModel=null;document.getElementById("popup").style.display="none";}
 function updateOrbit(dt){
   if(!orbiting||selModel===null)return;
-  const p=pedestals[selModel],cx=p.pos[0],cz=p.pos[1];
-  const tx=cx+Math.cos(oAngle)*oRad,tz=cz+Math.sin(oAngle)*oRad,ty=p.group.position.y+0.98+oY;
-  camera.position.lerp(new THREE.Vector3(tx,ty,tz),5*dt);camera.lookAt(cx,p.group.position.y+0.98,cz);
+  const obj=MODEL_OBJECTS[selModel];
+  if(!obj) return;
+  const cx=obj.data.x, cz=obj.data.z, cy=obj.data.y||0;
+  const tx=cx+Math.cos(oAngle)*oRad,tz=cz+Math.sin(oAngle)*oRad,ty=cy+0.5+oY;
+  camera.position.lerp(new THREE.Vector3(tx,ty,tz),5*dt);camera.lookAt(cx,cy+0.5,cz);
 }
+
+// ===================== UPDATE / ANIMATE =====================
+function findNearestModel(){
+  const cp=camera.position.clone();let n=null,d=4.0;
+  for(let i=0;i<MODEL_OBJECTS.length;i++){
+    const obj=MODEL_OBJECTS[i];
+    if(!obj||!obj.loaded) continue;
+    const dx=cp.x-obj.data.x, dz=cp.z-obj.data.z;
+    const dist=Math.sqrt(dx*dx+dz*dz);if(dist<d){d=dist;n=i;}
+  }
+  return n;
+}
+function updateInfo(){
+  const nearest=findNearestModel();
+  if(nearest!==null){
+    const obj=MODEL_OBJECTS[nearest];
+    document.getElementById("hall").textContent="展区";
+    document.getElementById("exh").textContent=MODEL_NAME_MAP[MODELS[nearest]] || "展品 #"+(nearest+1);
+    document.getElementById("hint").textContent=obj.loaded?"滚轮缩放  拖动旋转  按E浏览":"加载中...";
+    itgt=nearest;
+  }else{document.getElementById("hall").textContent="走廊";document.getElementById("exh").textContent="";document.getElementById("hint").textContent="四处走走探索";itgt=null;}
+}
+
+// Always render minimap in free roam mode
 function updateFP(dt){
   if(orbiting||!pointerLocked)return;const spd=8*dt;vel.set(0,0,0);
   if(mvF)vel.z-=spd;if(mvB)vel.z+=spd;if(mvL)vel.x-=spd;if(mvR)vel.x+=spd;
   if(vel.length()>0){vel.normalize().multiplyScalar(spd);
     const fwd=new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);fwd.y=0;fwd.normalize();
     const rgt=new THREE.Vector3(1,0,0).applyQuaternion(camera.quaternion);rgt.y=0;rgt.normalize();
-    camera.position.addScaledVector(fwd,-vel.z);camera.position.addScaledVector(rgt,vel.x);
+    const desX = camera.position.x + (-vel.z * fwd.x + vel.x * rgt.x);
+    const desZ = camera.position.z + (-vel.z * fwd.z + vel.x * rgt.z);
+    const clamped = clampMovement(desX, desZ, CAMERA_COL_RADIUS);
+    camera.position.x = clamped.x;
+    camera.position.z = clamped.z;
     const now=performance.now();if(now-lastStep>400){snd(60,0.06,0.02);lastStep=now;}}
-  camera.position.x=Math.max(-10,Math.min(10,camera.position.x));
-  camera.position.z=Math.max(-20,Math.min(22,camera.position.z));
 }
 function animate(){
   requestAnimationFrame(animate);const dt=Math.min(clk.getDelta(),0.1);
   if(pointerLocked && !EDIT_MODE){updateFP(dt);updateInfo();updateMinimap();}
   updateOrbit(dt);
-  const t=performance.now()*0.001;
-  pedestals.forEach(p=>{if(!p.loaded){p.ring.material.emissiveIntensity=0.4+Math.sin(t*2+p.index)*0.3;}});
+  // Animate unloaded model rings (flash) — but we no longer have pedestal rings
   renderer.render(scene,camera);
 }
+
+// ===================== BOOT =====================
+async function fetchModelList() {
+  try {
+    const resp = await fetch("api/models");
+    const data = await resp.json();
+    MODELS = data.models;
+    document.getElementById("subtitle").textContent = MODELS.length + " 3D Exhibits";
+  } catch (e) {
+    console.error("Failed to fetch model list", e);
+    MODELS = [];
+    document.getElementById("subtitle").textContent = "未找到模型";
+  }
+}
+async function fetchPaintingList() {
+  try {
+    const resp = await fetch("api/paintings");
+    const data = await resp.json();
+    PAINTINGS = data.paintings;
+  } catch (e) {
+    console.error("Failed to fetch painting list", e);
+    PAINTINGS = [];
+  }
+}
+async function fetchNameMap() {
+  try { const resp = await fetch("api/name-map"); NAME_MAP = await resp.json(); } catch(e){}
+}
+async function fetchPaintingSizes() {
+  try { const resp = await fetch("api/painting-sizes"); PAINTING_SIZES = await resp.json(); } catch(e){}
+}
+async function fetchPaintingLayout() {
+  try { const resp = await fetch("api/paintings-layout"); const data = await resp.json(); PAINTING_LAYOUT = data.layout; } catch(e){ PAINTING_LAYOUT = null; }
+}
+
 async function startMuseum() {
-  await Promise.all([fetchModelList(), fetchPaintingList(), fetchNameMap(), fetchPaintingSizes(), fetchPaintingLayout()]);
+  await Promise.all([fetchModelList(), fetchPaintingList(), fetchNameMap(), fetchPaintingSizes(), fetchPaintingLayout(), fetchModelLayout(), fetchModelNameMap()]);
   buildMuseum();
   setupLights();
 
   if (MODELS.length > 0) {
-    loadAllModels();
+    // Ensure MODEL_LAYOUT is valid
+    if (!MODEL_LAYOUT || MODEL_LAYOUT.length === 0) {
+      MODEL_LAYOUT = buildDefaultModelLayout(MODELS.length);
+    }
+    for (let i = 0; i < Math.min(MODEL_LAYOUT.length, MODELS.length); i++) {
+      MODEL_LAYOUT[i].fileName = MODELS[i];
+    }
+    loadAllModelsFromLayout();
   }
   loadAllPaintings();
 
-  document.getElementById("subtitle").textContent = (MODELS.length ? MODELS.length+" 3D Exhibits | " : "") + PAINTINGS.length + " Paintings";
-  document.getElementById("hint").textContent="Walk around to explore!";
-  console.log("Museum ready -",pedestals.length,"exhibits,",PAINTINGS.length,"paintings");
+  document.getElementById("subtitle").textContent = (MODELS.length ? MODELS.length+" 件3D展品 | " : "") + PAINTINGS.length + " 幅画作";
+  document.getElementById("hint").textContent="按 [ / ] 调节视角高低";
+  console.log("云上艺术馆加载完成 -",MODELS.length,"件展品,",PAINTINGS.length,"幅画作");
 }
 
 startMuseum();
