@@ -1,0 +1,7 @@
+*.glb
+.claude/
+bakup/
+__pycache__/
+*.pyc
+assets/images/new_images*/
+_patch.py
